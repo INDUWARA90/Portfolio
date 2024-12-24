@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BiMenu, BiX } from 'react-icons/bi';
-import { BsGithub, BsLinkedin } from 'react-icons/bs'
+import { BsFacebook, BsGithub, BsLinkedin } from 'react-icons/bs'
 
 function Header() {
 
@@ -29,10 +29,12 @@ function Header() {
             </ul>
 
             <ul className='hidden md:flex gap-10'>
-                <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100'> <BsLinkedin /> </li>
+                <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100'>    <BsLinkedin /> </li>
                 <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100'> <BsGithub /> </li>
+                <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100'> <BsFacebook/> </li>
             </ul>
 
+            {/* To handel menu icon active or not */}
             {
                 isOpen ? (
                     <BiX onClick={menuOpen} className='block md:hidden text-4xl cursor-pointer' />
@@ -40,7 +42,8 @@ function Header() {
                     <BiMenu onClick={menuOpen} className='block md:hidden text-4xl cursor-pointer' />
                 )
             }
-
+            
+            {/* to handel side navigation Bar */}
             {
                 isOpen && (
                     <div className={`fixed right-0 top-[84px] flex h-screen w-1/2 
@@ -57,6 +60,7 @@ function Header() {
                         <ul className='flex flex-wrap gap-5'>
                             <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100'> <BsLinkedin /> </li>
                             <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100'> <BsGithub /> </li>
+                            <li className='cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100'> <BsFacebook/> </li>
                         </ul>
 
                     </div>

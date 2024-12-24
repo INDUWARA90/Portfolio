@@ -1,5 +1,8 @@
 import React from 'react'
 import Header from './Componets/Header/Header'
+import About from './Componets/About/About'
+import TechStack from './Componets/TechStack/TechStack'
+import Project from './Componets/Project/Project'
 
 export default function App() {
   return (
@@ -9,6 +12,13 @@ export default function App() {
         
         <Header />
 
+        <About />
+
+        <TechStack />
+
+        <Project />
+
+        
 
       </main>
 
