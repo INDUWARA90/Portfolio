@@ -3,6 +3,9 @@ import Header from './Componets/Header/Header'
 import About from './Componets/About/About'
 import TechStack from './Componets/TechStack/TechStack'
 import Project from './Componets/Project/Project'
+import Contact from './Componets/Contact/Contact'
+import Footer from './Componets/Footer/Footer'
+import Education from './Componets/Education/Education'
 
 export default function App() {
   return (
@@ -13,14 +16,18 @@ export default function App() {
         <Header />
 
         <About />
+        
+        {/* <Education /> */}
 
         <TechStack />
 
         <Project />
 
-        
-
+        <Contact />
+    
       </main>
+      
+      <Footer />
 
     </>
   )

@@ -13,7 +13,7 @@ function TechStack() {
     }
 
     return (
-        <div className='flex min-h[70vh] w-full flex-col items-center justify-center gap-16 md:gap-32'>
+        <div className='flex min-h[70vh] w-full flex-col items-center justify-center gap-16 md:gap-30' id='tech'>
 
             <motion.h1 
             variants={variants}
@@ -21,7 +21,7 @@ function TechStack() {
             whileInView="visible"
             transition={{duration:0.5}}
 
-            className='text-4xl font-light text-white md:text-6xl'>Technologies</motion.h1>
+            className='text-4xl text-white font-semibold md:text-5xl'>Technologies</motion.h1>
 
             <div className='flex flex-wrap items-center justify-center gap-7 p-5'>
 

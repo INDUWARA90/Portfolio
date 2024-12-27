@@ -37,11 +37,11 @@ function About() {
 
                     <h3 className='bg-gradient-to-r from-pink-500 to-blue-500 
                      bg-clip-text text-transparent text-2xl font- md:text-3xl'>
-                        Fronted Developer
+                        Full Stack Developer
                     </h3>
 
                     <p className='md:text-base text-pretty text-sm text-gray-400'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus accusantium quas, quis nisi quasi quae aperiam necessitatibus in provident quod reiciendis, dolor pariatur, impedit ipsam nobis excepturi dignissimos neque veniam?
+                    I am a full-stack developer in the process of learning and refining my skills in both front-end and back-end technologies. With experience in JavaScript, React, Node.js, and more, I focus on building responsive, user-friendly web applications. My portfolio reflects my commitment to growth and my passion for creating efficient, scalable solutions.
                     </p>
 
                 </motion.div>
