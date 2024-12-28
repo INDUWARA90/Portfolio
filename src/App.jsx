@@ -17,7 +17,7 @@ export default function App() {
 
         <About />
         
-        {/* <Education /> */}
+        <Education />
 
         <TechStack />
 

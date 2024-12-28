@@ -42,8 +42,8 @@ function ProjectCard({project}) {
                 </div>
                 <div className="flex items-center flex-wrap gap-4">
                 
-                   <a href={project.clink} target='_blank'><button className='p-3 bg-red-500 rounded-md '>View Code</button></a> 
-                   <a href={project.dlink} target='_blank'><button className='p-3 bg-red-500 rounded-md '>Demo</button></a> 
+                   <a href={project.clink} target='_blank'><button className='p-3 bg-gradient-to-r from-teal-200 to-teal-500 rounded-md font-semibold  hover:text-black'>View Code</button></a> 
+                   <a href={project.dlink} target='_blank'><button className='p-3 bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-md font-semibold hover:text-black'>Demo</button></a> 
                 
                 </div>
             </div>

@@ -4,7 +4,7 @@ import { motion } from 'motion/react'
 
 function About() {
     return (
-        <div id='home' className='px-16 flex min-h-screen w-full 
+        <section id='home' className='px-16 flex min-h-screen w-full 
         items-center justify-center py-28 md:px-32' >
 
             <div className="flex flex-col items-center justify-center gap-10 text-white">
@@ -47,7 +47,7 @@ function About() {
                 </motion.div>
             </div>
 
-        </div>
+        </section>
 
     )
 }

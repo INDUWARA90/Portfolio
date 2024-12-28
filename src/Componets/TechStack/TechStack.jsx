@@ -13,7 +13,7 @@ function TechStack() {
     }
 
     return (
-        <div className='flex min-h[70vh] w-full flex-col items-center justify-center gap-16 md:gap-30' id='tech'>
+        <section className=' mb-48 flex min-h[70vh] w-full flex-col items-center justify-center gap-16 md:gap-30' id='tech'>
 
             <motion.h1 
             variants={variants}
@@ -72,7 +72,7 @@ function TechStack() {
 
             </div>
 
-        </div>
+        </section>
     )
 }
 

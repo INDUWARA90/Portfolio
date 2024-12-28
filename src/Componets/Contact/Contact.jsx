@@ -35,7 +35,7 @@ function Contact() {
 
 
     return (
-        <div className='border-red-600 mt-7' id='contact'>
+        <section className='mt-40' id='contact'>
             <h3 className='text-white text-1xl hover:opacity-70 text-center'>Get in touch</h3>
             <h1 className='text-white text-5xl hover:opacity-70 text-center'>Contact Me</h1>
 
@@ -56,14 +56,14 @@ function Contact() {
                     </div>
 
                     <div className="flex flex-col items-center mt-6">
-                        <button type='submit' className='text-1xl text-white font-semibold bg-gray-700 p-2 w-48 rounded-md w-fit'>Submit</button>
+                        <button type='submit' className='text-1xl text-white font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 p-2 w-48 rounded-md hover:text-black '>Submit</button>
                     </div>
                     
                 </form>
 
 
             </div>
-        </div>
+        </section>
     )
 }
 
