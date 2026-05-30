@@ -4,7 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src//assets/boy.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>INDUWARA</title>
+    <meta name="description" content="Induwara Vishwakantha - Software Engineer portfolio with projects, skills, blog, and contact details." />
+    <meta property="og:title" content="Induwara Vishwakantha Portfolio" />
+    <meta property="og:description" content="Modern software engineer portfolio for internships, freelance work, and full-stack projects." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Induwara Vishwakantha | Software Engineer</title>
+    <script>
+      if ('serviceWorker' in navigator && ['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          registrations.forEach((registration) => registration.unregister())
+        })
+        if ('caches' in window) {
+          caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)))
+        }
+      }
+    </script>
+    <script type="module">
+      if (['5173', '5174', '5175'].includes(window.location.port) && !window.__vite_plugin_react_preamble_installed__) {
+        import('/' + '@react-refresh').then((RefreshRuntime) => {
+          RefreshRuntime.default.injectIntoGlobalHook(window)
+          window.$RefreshReg$ = () => {}
+          window.$RefreshSig$ = () => (type) => type
+          window.__vite_plugin_react_preamble_installed__ = true
+        })
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

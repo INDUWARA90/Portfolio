@@ -1,0 +1,9 @@
+{
+  "name": "Induwara Vishwakantha Portfolio",
+  "short_name": "Induwara",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#22d3ee",
+  "description": "Software Engineer portfolio with projects, skills, blog, and contact details."
+}
