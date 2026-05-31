@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AdminDashboard from './components/dashboard/AdminDashboard'
 import DashboardLock from './components/dashboard/DashboardLock'
 import Footer from './components/layout/Footer'
@@ -10,17 +10,11 @@ import Hero from './components/sections/Hero'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
 import { initialContent } from './data/siteContent'
-import { useLocalStorage } from './hooks/useLocalStorage'
 
 export default function App() {
-  const [content, setContent] = useLocalStorage('portfolio-content', initialContent)
+  const [content, setContent] = useState(initialContent)
   const [dashboardOpen, setDashboardOpen] = useState(false)
   const [dashboardUnlocked, setDashboardUnlocked] = useState(false)
-
-  useEffect(() => {
-    document.documentElement.classList.remove('light')
-    window.localStorage.setItem('portfolio-theme', 'dark')
-  }, [])
 
   return (
     <div className="page-shell min-h-screen overflow-x-hidden text-white">

@@ -6,8 +6,8 @@ export const initialContent = {
     name: 'Induwara Vishwakantha',
     role: 'Software Engineer',
     location: 'Sri Lanka',
-    email: 'hello@induwara.dev',
-    phone: '+94 7X XXX XXXX',
+    email: 'induwaravishwakantha90@gmail.com',
+    phone: '+94 76 569 4015',
     image: profileImage,
     resumeUrl: '/resume.pdf',
     intro:
@@ -16,7 +16,7 @@ export const initialContent = {
       'I am a full-stack developer focused on turning real problems into fast, user-friendly products. My work combines frontend polish, backend thinking, and a strong learning mindset.',
     objective:
       'I am looking for internships, freelance projects, and product teams where I can contribute reliable code, learn from strong engineers, and build software that people actually enjoy using.',
-    interests: ['Full-stack apps', 'Firebase products', 'SaaS dashboards', 'API design', 'UI systems'],
+    interests: ['Full-stack apps', 'React frontend', 'UI systems', '.NET backend'],
   },
   socials: [
     { label: 'GitHub', href: 'https://github.com/INDUWARA90' },
@@ -47,11 +47,8 @@ export const initialContent = {
     { name: 'VS Code', category: 'Tools', level: 90 },
   ],
   services: [
-    'Responsive portfolio websites',
-    'React frontend development',
-    'Firebase web applications',
-    'Admin dashboards',
-    'API integration and bug fixing',
+    'React frontend Development',
+    '.NET Development',  
   ],
   projects: [
     {

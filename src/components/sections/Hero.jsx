@@ -47,7 +47,7 @@ function Hero({ profile, socials, stats }) {
             <img src={profile.image} alt={profile.name} className="aspect-[4/5] w-full rounded-md object-cover" />
             <div className="absolute bottom-5 left-5 right-5 rounded-md bg-[#101828]/88 p-4 text-sm text-white shadow-2xl backdrop-blur light:border light:border-slate-200 light:bg-white/95 light:text-slate-950">
               <p className="font-bold text-teal-300 light:text-sky-700">Currently building</p>
-              <p className="mt-1 text-slate-300 light:text-slate-700">React apps, Firebase dashboards, and clean product interfaces.</p>
+              <p className="mt-1 text-slate-300 light:text-slate-700">React apps and clean product interfaces.</p>
             </div>
           </div>
         </div>
