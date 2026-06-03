@@ -26,15 +26,15 @@ function Certificates({ certifications }) {
                 )}
               </div>
               <div className="p-5">
-                <p className="text-sm text-cyan-300">{certificate.issuer} / {certificate.year}</p>
-                <h3 className="mt-2 text-2xl font-semibold text-white light:text-slate-950">{certificate.title}</h3>
+                <p className="text-sm text-[#2FA084]">{certificate.issuer} / {certificate.year}</p>
+                <h3 className="mt-2 text-2xl font-semibold text-[#1F6F5F] light:text-slate-950">{certificate.title}</h3>
               </div>
             </button>
           ))}
         </div>
       </div>
       {selected && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/80 p-4 backdrop-blur">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-[#1F6F5F]/45 p-4 backdrop-blur">
           <div className="glass-panel w-full max-w-2xl rounded-md p-5">
             <button onClick={() => setSelected(null)} className="btn-secondary mb-4 px-3 py-2 text-sm">Close</button>
             {selected.image && (

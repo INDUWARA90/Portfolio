@@ -42,14 +42,14 @@ function Skills({ skills }) {
             const Icon = skillIcons[skill.name]
 
             return (
-              <div key={skill.name} className="premium-card rounded-md p-5">
+              <div key={skill.name} className="premium-card group rounded-md p-5">
                 <div className="flex items-center gap-4">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-teal-300 text-2xl text-slate-950 light:bg-sky-100 light:text-sky-700">
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-[#6FCF97] text-2xl text-[#1F6F5F] shadow-[0_12px_24px_rgba(47,160,132,0.18)] transition group-hover:bg-[#2FA084] group-hover:text-white light:bg-sky-100 light:text-sky-700">
                     {Icon ? <Icon /> : <span className="text-sm font-black">{skill.name.slice(0, 2)}</span>}
                   </div>
                   <div>
-                    <h3 className="font-bold text-white light:text-slate-950">{skill.name}</h3>
-                    <p className="text-sm text-slate-400 light:text-slate-600">{skill.category}</p>
+                    <h3 className="font-bold text-[#1F6F5F] light:text-slate-950">{skill.name}</h3>
+                    <p className="text-sm text-[#1F6F5F]/62 light:text-slate-600">{skill.category}</p>
                   </div>
                 </div>
               </div>

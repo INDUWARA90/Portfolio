@@ -15,8 +15,8 @@ function ScrollTools() {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-50 h-1 bg-cyan-300" style={{ width: `${progress}%` }} />
-      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-5 left-5 z-40 rounded-md border border-white/10 bg-slate-950 px-4 py-3 text-sm font-bold text-white shadow-xl light:bg-white light:text-slate-950">
+      <div className="fixed left-0 top-0 z-50 h-1 bg-[#2FA084]" style={{ width: `${progress}%` }} />
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-5 left-5 z-40 rounded-md border border-[#1F6F5F]/12 bg-white/90 px-4 py-3 text-sm font-bold text-[#1F6F5F] shadow-xl light:bg-white light:text-slate-950">
         Top
       </button>
     </>

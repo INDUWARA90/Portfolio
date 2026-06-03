@@ -34,24 +34,24 @@ function Chatbot({ content }) {
 
   return (
     <>
-      <button onClick={() => setOpen((value) => !value)} className="fixed bottom-5 right-5 z-40 rounded-md bg-cyan-300 px-4 py-3 text-sm font-bold text-slate-950 shadow-xl">
+      <button onClick={() => setOpen((value) => !value)} className="fixed bottom-5 right-5 z-40 rounded-md bg-[#2FA084] px-4 py-3 text-sm font-bold text-white shadow-xl">
         AI Chat
       </button>
       {open && (
-        <div className="fixed bottom-20 right-5 z-40 flex h-[460px] w-[min(92vw,360px)] flex-col rounded-md border border-white/10 bg-slate-950 shadow-2xl light:bg-white">
-          <div className="border-b border-white/10 p-4">
-            <h3 className="font-semibold text-white light:text-slate-950">Portfolio Assistant</h3>
+        <div className="fixed bottom-20 right-5 z-40 flex h-[460px] w-[min(92vw,360px)] flex-col rounded-md border border-[#1F6F5F]/12 bg-white shadow-2xl light:bg-white">
+          <div className="border-b border-[#1F6F5F]/10 p-4">
+            <h3 className="font-semibold text-[#1F6F5F] light:text-slate-950">Portfolio Assistant</h3>
           </div>
           <div className="flex-1 space-y-3 overflow-auto p-4">
             {messages.map((message, index) => (
-              <div key={`${message.from}-${index}`} className={`rounded-md p-3 text-sm ${message.from === 'bot' ? 'bg-white/10 text-slate-200 light:bg-slate-100 light:text-slate-700' : 'bg-cyan-300 text-slate-950'}`}>
+              <div key={`${message.from}-${index}`} className={`rounded-md p-3 text-sm ${message.from === 'bot' ? 'bg-[#EEEEEE] text-[#1F6F5F] light:bg-slate-100 light:text-slate-700' : 'bg-[#6FCF97] text-[#1F6F5F]'}`}>
                 {message.text}
               </div>
             ))}
           </div>
-          <form onSubmit={handleSubmit} className="flex gap-2 border-t border-white/10 p-3">
-            <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask a question..." className="min-w-0 flex-1 rounded-md bg-white/10 px-3 py-2 text-sm text-white outline-none light:bg-slate-100 light:text-slate-950" />
-            <button className="rounded-md bg-cyan-300 px-3 py-2 text-sm font-bold text-slate-950">Send</button>
+          <form onSubmit={handleSubmit} className="flex gap-2 border-t border-[#1F6F5F]/10 p-3">
+            <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask a question..." className="min-w-0 flex-1 rounded-md bg-[#EEEEEE] px-3 py-2 text-sm text-[#1F6F5F] outline-none focus:ring-2 focus:ring-[#6FCF97] light:bg-slate-100 light:text-slate-950" />
+            <button className="rounded-md bg-[#2FA084] px-3 py-2 text-sm font-bold text-white">Send</button>
           </form>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { FiArrowUpRight, FiDownload } from 'react-icons/fi'
+import { FiArrowUpRight, FiDownload, FiMapPin, FiZap } from 'react-icons/fi'
 import fallbackProfileImage from '../../assets/Me.jpg'
 
 function Hero({ profile, socials, stats }) {
@@ -6,16 +6,29 @@ function Hero({ profile, socials, stats }) {
 
   return (
     <section id="home" className="relative px-4 pb-20 pt-32 md:px-8 lg:pt-36">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <p className="inline-flex rounded-md border border-teal-300/30 bg-teal-300/10 px-4 py-2 text-sm font-bold text-teal-200 light:border-sky-200 light:bg-sky-50 light:text-sky-700">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="hero-panel rounded-md p-6 md:p-8 lg:p-10">
+          <p className="inline-flex rounded-md border border-[#2FA084]/20 bg-[#6FCF97]/18 px-4 py-2 text-sm font-bold text-[#1F6F5F] light:border-sky-200 light:bg-sky-50 light:text-sky-700">
             Available for internships and freelance projects
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-white light:text-slate-950 md:text-7xl">
+          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-[#1F6F5F] light:text-slate-950 md:text-7xl">
             {profile.name}
-            <span className="block text-teal-300 light:text-sky-700">{profile.role}</span>
+            <span className="block text-[#2FA084] light:text-sky-700">{profile.role}</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 light:text-slate-700">{profile.intro}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#1F6F5F]/78 light:text-slate-700">{profile.intro}</p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            {profile.location && (
+              <span className="soft-chip px-4 py-2 text-sm font-semibold">
+                <FiMapPin />
+                {profile.location}
+              </span>
+            )}
+            <span className="soft-chip px-4 py-2 text-sm font-semibold">
+              <FiZap />
+              React / .NET
+            </span>
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             {profile.resumeUrl && (
@@ -38,8 +51,8 @@ function Hero({ profile, socials, stats }) {
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {visibleStats.map((stat) => (
               <div key={stat.label} className="premium-card rounded-md p-5">
-                <div className="text-3xl font-black text-white light:text-slate-950">{stat.value}</div>
-                <div className="mt-1 text-sm text-slate-400 light:text-slate-600">{stat.label}</div>
+                <div className="text-3xl font-black text-[#1F6F5F] light:text-slate-950">{stat.value}</div>
+                <div className="mt-1 text-sm text-[#1F6F5F]/65 light:text-slate-600">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -56,6 +69,9 @@ function Hero({ profile, socials, stats }) {
                   event.currentTarget.src = fallbackProfileImage
                 }}
               />
+              <div className="absolute -bottom-5 left-5 right-5 rounded-md border border-[#2FA084]/20 bg-white/92 p-4 shadow-[0_18px_38px_rgba(31,111,95,0.16)] backdrop-blur">
+                <p className="text-sm font-black text-[#1F6F5F]">Building clean, responsive web experiences</p>
+              </div>
             </div>
           </div>
         )}

@@ -29,16 +29,16 @@ function CommandPalette({ isOpen, onClose, onOpenDashboard }) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/70 p-4 backdrop-blur">
-      <div className="mx-auto mt-24 w-full max-w-xl rounded-md border border-white/10 bg-slate-950 p-4 shadow-2xl light:bg-white">
-        <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search commands..." className="w-full rounded-md border border-white/10 bg-white/10 px-4 py-3 text-white outline-none light:bg-slate-50 light:text-slate-950" />
+    <div className="fixed inset-0 z-50 bg-[#1F6F5F]/42 p-4 backdrop-blur">
+      <div className="mx-auto mt-24 w-full max-w-xl rounded-md border border-[#1F6F5F]/12 bg-white p-4 shadow-2xl light:bg-white">
+        <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search commands..." className="w-full rounded-md border border-[#1F6F5F]/14 bg-[#EEEEEE]/70 px-4 py-3 text-[#1F6F5F] outline-none focus:border-[#2FA084] light:bg-slate-50 light:text-slate-950" />
         <div className="mt-4 space-y-2">
           {commands.map(([label, href]) => (
-            <a key={label} href={href} onClick={onClose} className="block rounded-md px-4 py-3 text-slate-200 hover:bg-white/10 light:text-slate-700">
+            <a key={label} href={href} onClick={onClose} className="block rounded-md px-4 py-3 text-[#1F6F5F] hover:bg-[#6FCF97]/16 light:text-slate-700">
               Go to {label}
             </a>
           ))}
-          <button onClick={() => { onOpenDashboard(); onClose() }} className="block w-full rounded-md px-4 py-3 text-left text-cyan-300 hover:bg-white/10">
+          <button onClick={() => { onOpenDashboard(); onClose() }} className="block w-full rounded-md px-4 py-3 text-left text-[#2FA084] hover:bg-[#6FCF97]/16">
             Open Admin Dashboard
           </button>
         </div>

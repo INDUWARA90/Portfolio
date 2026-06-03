@@ -7,6 +7,8 @@ const navItems = [
   ['About', '#about'],
   ['Skills', '#skills'],
   ['Projects', '#projects'],
+  ['Experience', '#experience'],
+  ['Certificates', '#certificates'],
   ['Contact', '#contact'],
 ]
 
@@ -19,16 +21,16 @@ function Header({ profile, socials, onOpenDashboard }) {
   const closeSidebar = () => setIsOpen(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 text-white light:text-slate-950">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-md border border-white/10 bg-[#101828]/78 px-4 py-3 shadow-[0_18px_60px_rgba(16,24,40,0.22)] backdrop-blur-2xl light:border-slate-200 light:bg-white/95 light:shadow-[0_16px_45px_rgba(15,23,42,0.1)] md:px-5">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 text-[#1F6F5F] light:text-slate-950">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-md border border-[#1F6F5F]/10 bg-white/88 px-4 py-3 shadow-[0_18px_50px_rgba(31,111,95,0.12)] backdrop-blur-2xl light:border-slate-200 light:bg-white/95 light:shadow-[0_16px_45px_rgba(15,23,42,0.1)] md:px-5">
         <a href="#home" className="text-lg font-extrabold tracking-tight">
-          {brand}<span className="text-teal-300 light:text-sky-600">.</span>
+          {brand}<span className="text-[#2FA084] light:text-sky-600">.</span>
         </a>
 
-        <ul className="hidden items-center gap-5 text-sm font-semibold text-slate-300 light:text-slate-700 lg:flex">
+        <ul className="hidden items-center gap-4 text-sm font-semibold text-[#1F6F5F]/75 light:text-slate-700 lg:flex">
           {navItems.map(([label, href]) => (
             <li key={label}>
-              <a className="transition hover:text-teal-300 light:hover:text-sky-700" href={href}>
+              <a className="transition hover:text-[#2FA084] light:hover:text-sky-700" href={href}>
                 {label}
               </a>
             </li>
@@ -72,11 +74,11 @@ function Header({ profile, socials, onOpenDashboard }) {
       <div
         className={`fixed right-0 top-0 z-40 h-screen w-64 transform transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
-        } border-l border-white/10 bg-[#101828]/95 px-6 py-6 backdrop-blur-xl light:border-slate-200 light:bg-white/95 overflow-y-auto`}
+        } border-l border-[#1F6F5F]/10 bg-white/95 px-6 py-6 backdrop-blur-xl light:border-slate-200 light:bg-white/95 overflow-y-auto`}
       >
         <button
           onClick={closeSidebar}
-          className="mb-8 ml-auto flex text-3xl text-white light:text-slate-950"
+          className="mb-8 ml-auto flex text-3xl text-[#1F6F5F] light:text-slate-950"
           aria-label="Close menu"
         >
           <BiX />
@@ -88,13 +90,13 @@ function Header({ profile, socials, onOpenDashboard }) {
               key={label}
               href={href}
               onClick={closeSidebar}
-              className="text-lg font-semibold text-slate-200 transition hover:text-teal-300 light:text-slate-700 light:hover:text-sky-600"
+              className="text-lg font-semibold text-[#1F6F5F] transition hover:text-[#2FA084] light:text-slate-700 light:hover:text-sky-600"
             >
               {label}
             </a>
           ))}
 
-          <div className="border-t border-white/10 pt-6 light:border-slate-200">
+          <div className="border-t border-[#1F6F5F]/10 pt-6 light:border-slate-200">
             <div className="mb-4 flex gap-3">
               {github && (
                 <a
@@ -102,7 +104,7 @@ function Header({ profile, socials, onOpenDashboard }) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
-                  className="icon-button text-2xl transition hover:text-teal-300 light:hover:text-sky-600"
+                  className="icon-button text-2xl transition hover:text-[#2FA084] light:hover:text-sky-600"
                 >
                   <BsGithub />
                 </a>
@@ -113,7 +115,7 @@ function Header({ profile, socials, onOpenDashboard }) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
-                  className="icon-button text-2xl transition hover:text-teal-300 light:hover:text-sky-600"
+                  className="icon-button text-2xl transition hover:text-[#2FA084] light:hover:text-sky-600"
                 >
                   <BsLinkedin />
                 </a>

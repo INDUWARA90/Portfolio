@@ -6,8 +6,10 @@ import DashboardLock from './components/dashboard/DashboardLock'
 import Footer from './components/layout/Footer'
 import Header from './components/layout/Header'
 import About from './components/sections/About'
+import Certificates from './components/sections/Certificates'
 import Contact from './components/sections/Contact'
 import Experience from './components/sections/Experience'
+import GithubPanel from './components/sections/GithubPanel'
 import Hero from './components/sections/Hero'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
@@ -70,16 +72,16 @@ export default function App() {
   }
 
   return (
-    <div className="page-shell min-h-screen overflow-x-hidden text-white">
+    <div className="page-shell min-h-screen overflow-x-hidden text-[#1F6F5F]">
       {isContentLoading && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/65 px-4 text-white backdrop-blur-md">
-          <div className="w-full max-w-sm rounded-md border border-white/10 bg-[#101828]/90 p-6 text-center shadow-2xl">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-[#1F6F5F]/30 px-4 text-[#1F6F5F] backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-md border border-[#2FA084]/20 bg-white/95 p-6 text-center shadow-2xl">
             <div className="relative mx-auto grid h-16 w-16 place-items-center">
-              <div className="absolute inset-0 animate-spin rounded-full border-2 border-teal-300/20 border-t-teal-300" />
+              <div className="absolute inset-0 animate-spin rounded-full border-2 border-[#6FCF97]/30 border-t-[#2FA084]" />
               
             </div>
             <h2 className="mt-5 text-2xl font-black">Loading Data</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-400">Syncing the latest portfolio content from Firebase.</p>
+            <p className="mt-2 text-sm leading-6 text-[#1F6F5F]/70">Syncing the latest portfolio content from Firebase.</p>
           </div>
         </div>
       )}
@@ -89,12 +91,12 @@ export default function App() {
           className={`fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] max-w-md items-center gap-3 rounded-md border px-4 py-3 text-sm shadow-2xl backdrop-blur sm:w-96 ${
             contentError
               ? 'border-red-300/30 bg-red-950/85 text-red-100'
-              : 'border-teal-200/25 bg-slate-950/85 text-slate-100'
+              : 'border-[#2FA084]/25 bg-white/90 text-[#1F6F5F]'
           }`}
         >
           <span
             className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${
-              contentError ? 'bg-red-300 text-red-950' : 'bg-teal-300 text-slate-950'
+              contentError ? 'bg-red-300 text-red-950' : 'bg-[#6FCF97] text-[#1F6F5F]'
             }`}
           >
             {contentError ? <FiAlertCircle /> : <FiCloud />}
@@ -120,6 +122,8 @@ export default function App() {
         <Skills skills={content.skills} />
         <Projects projects={content.projects} />
         <Experience experience={content.experience} education={content.education} />
+        <Certificates certifications={content.certifications} />
+        <GithubPanel github={content.github} socials={content.socials} />
         <Contact profile={content.profile} />
       </main>
 
