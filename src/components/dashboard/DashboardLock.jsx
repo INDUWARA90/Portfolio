@@ -12,7 +12,7 @@ const authMessages = {
   'auth/wrong-password': 'Email or password is incorrect.',
 }
 
-function DashboardLock({ onUnlock, onClose }) {
+function DashboardLock({ onClose }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSigningIn, setIsSigningIn] = useState(false)
@@ -25,7 +25,6 @@ function DashboardLock({ onUnlock, onClose }) {
 
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      onUnlock()
     } catch (signInError) {
       setError(authMessages[signInError.code] || signInError.message)
       setPassword('')

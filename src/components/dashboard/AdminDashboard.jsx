@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { signOut } from 'firebase/auth'
 import { FiInbox, FiMail, FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { auth } from '../../lib/firebase'
 import { deleteContactMessage, getContactMessages } from '../../lib/messages'
 import ImageUploader from './ImageUploader'
 
@@ -13,7 +15,7 @@ function toList(value) {
     .filter(Boolean)
 }
 
-function AdminDashboard({ content, setContent, onReset, onClose }) {
+function AdminDashboard({ content, setContent, onReset, user, onClose }) {
   const [tab, setTab] = useState('profile')
   const [draft, setDraft] = useState(content)
   const [isSaving, setIsSaving] = useState(false)
@@ -82,6 +84,11 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
     } finally {
       setIsSaving(false)
     }
+  }
+
+  async function logout() {
+    await signOut(auth)
+    onClose()
   }
 
   function updateProfile(field, value) {
@@ -192,7 +199,9 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.24em] text-teal-300 light:text-sky-700">Dashboard</p>
             <h2 className="mt-2 text-3xl font-black">Manage Portfolio</h2>
-            <p className="mt-2 text-sm text-slate-400 light:text-slate-600">Changes are saved to Firebase Firestore.</p>
+            <p className="mt-2 text-sm text-slate-400 light:text-slate-600">
+              Signed in as {user?.email || 'admin'}.
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <button onClick={resetContent} disabled={isSaving} className="btn-secondary gap-2 px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60">
@@ -202,6 +211,10 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
             <button onClick={saveChanges} disabled={isSaving} className="btn-primary gap-2 px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60">
               <FiSave />
               {isSaving ? 'Saving' : 'Save'}
+            </button>
+            <button onClick={logout} className="btn-secondary gap-2 px-4 py-2 text-sm">
+              <FiX />
+              Logout
             </button>
             <button onClick={onClose} className="icon-button" aria-label="Close dashboard">
               <FiX />

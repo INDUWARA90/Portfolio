@@ -18,10 +18,12 @@ function Hero({ profile, socials, stats }) {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 light:text-slate-700">{profile.intro}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={profile.resumeUrl} download className="btn-primary gap-2 px-5 py-3 text-sm">
-              <FiDownload />
-              Download CV
-            </a>
+            {profile.resumeUrl && (
+              <a href={profile.resumeUrl} download="CV.pdf" className="btn-primary gap-2 px-5 py-3 text-sm">
+                <FiDownload />
+                Download CV
+              </a>
+            )}
             <a href="#projects" className="btn-secondary gap-2 px-5 py-3 text-sm">
               View Work
               <FiArrowUpRight />

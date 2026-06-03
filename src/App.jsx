@@ -20,11 +20,12 @@ export default function App() {
   const [isContentLoading, setIsContentLoading] = useState(true)
   const [contentError, setContentError] = useState('')
   const [dashboardOpen, setDashboardOpen] = useState(false)
-  const [dashboardUnlocked, setDashboardUnlocked] = useState(false)
+  const [dashboardUser, setDashboardUser] = useState(null)
+  const dashboardUnlocked = Boolean(dashboardUser)
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
-      setDashboardUnlocked(Boolean(user))
+      setDashboardUser(user)
     })
   }, [])
 
@@ -70,7 +71,20 @@ export default function App() {
 
   return (
     <div className="page-shell min-h-screen overflow-x-hidden text-white">
-      {(isContentLoading || contentError) && (
+      {isContentLoading && (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/65 px-4 text-white backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-md border border-white/10 bg-[#101828]/90 p-6 text-center shadow-2xl">
+            <div className="relative mx-auto grid h-16 w-16 place-items-center">
+              <div className="absolute inset-0 animate-spin rounded-full border-2 border-teal-300/20 border-t-teal-300" />
+              
+            </div>
+            <h2 className="mt-5 text-2xl font-black">Loading Data</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Syncing the latest portfolio content from Firebase.</p>
+          </div>
+        </div>
+      )}
+
+      {contentError && (
         <div
           className={`fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] max-w-md items-center gap-3 rounded-md border px-4 py-3 text-sm shadow-2xl backdrop-blur sm:w-96 ${
             contentError
@@ -86,9 +100,9 @@ export default function App() {
             {contentError ? <FiAlertCircle /> : <FiCloud />}
           </span>
           <div>
-            <p className="font-black">{isContentLoading ? 'Syncing Portfolio' : 'Firebase Connection Issue'}</p>
+            <p className="font-black">Firebase Connection Issue</p>
             <p className="mt-0.5 text-xs opacity-80">
-              {isContentLoading ? 'Loading the latest content from Firestore...' : contentError}
+              {contentError}
             </p>
           </div>
         </div>
@@ -112,7 +126,6 @@ export default function App() {
       <Footer profile={content.profile} socials={content.socials} />
       {dashboardOpen && !dashboardUnlocked && (
         <DashboardLock
-          onUnlock={() => setDashboardUnlocked(true)}
           onClose={() => setDashboardOpen(false)}
         />
       )}
@@ -121,6 +134,7 @@ export default function App() {
           content={content}
           setContent={updateContent}
           onReset={resetContent}
+          user={dashboardUser}
           onClose={() => setDashboardOpen(false)}
         />
       )}

@@ -30,6 +30,18 @@ function resolveImageUrl(value, fallback = '') {
   return fallback
 }
 
+function isDeployableFileUrl(value) {
+  if (!value || typeof value !== 'string') return false
+  if (value === '/resume.pdf') return false
+  if (value.startsWith('/src/') || value.includes('/src/assets/')) return false
+
+  return value.startsWith('https://') || value.startsWith('http://') || value.startsWith('/assets/')
+}
+
+function resolveFileUrl(value, fallback = '') {
+  return isDeployableFileUrl(value) ? value : fallback
+}
+
 function normalizePortfolioContent(content) {
   const defaultProjectImage = initialContent.projects[0]?.image || ''
   const defaultCertificateImage = initialContent.certifications[0]?.image || ''
@@ -38,6 +50,7 @@ function normalizePortfolioContent(content) {
     ...initialContent.profile,
     ...content.profile,
     image: resolveImageUrl(content.profile?.image, initialContent.profile.image || ''),
+    resumeUrl: resolveFileUrl(content.profile?.resumeUrl, initialContent.profile.resumeUrl || ''),
   }
 
   const projects = Array.isArray(content.projects)
