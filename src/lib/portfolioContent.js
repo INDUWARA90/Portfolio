@@ -4,6 +4,13 @@ import { db } from './firebase'
 
 const CONTENT_DOC = doc(db, 'portfolio', 'content')
 
+const legacyImageMap = {
+  '/src/assets/Me.jpg': initialContent.profile.image,
+  'src/assets/Me.jpg': initialContent.profile.image,
+  '/src/assets/P01.png': initialContent.projects[0]?.image || '',
+  'src/assets/P01.png': initialContent.projects[0]?.image || '',
+}
+
 function isDeployableImageUrl(value) {
   if (!value || typeof value !== 'string') return false
   if (value.startsWith('/src/') || value.includes('/src/assets/')) return false
@@ -16,6 +23,13 @@ function isDeployableImageUrl(value) {
   )
 }
 
+function resolveImageUrl(value, fallback = '') {
+  if (legacyImageMap[value]) return legacyImageMap[value]
+  if (isDeployableImageUrl(value)) return value
+
+  return fallback
+}
+
 function normalizePortfolioContent(content) {
   const defaultProjectImage = initialContent.projects[0]?.image || ''
   const defaultCertificateImage = initialContent.certifications[0]?.image || ''
@@ -23,7 +37,7 @@ function normalizePortfolioContent(content) {
   const profile = {
     ...initialContent.profile,
     ...content.profile,
-    image: isDeployableImageUrl(content.profile?.image) ? content.profile.image : initialContent.profile.image || '',
+    image: resolveImageUrl(content.profile?.image, initialContent.profile.image || ''),
   }
 
   const projects = Array.isArray(content.projects)
@@ -33,7 +47,7 @@ function normalizePortfolioContent(content) {
         return {
           ...fallback,
           ...project,
-          image: isDeployableImageUrl(project.image) ? project.image : fallback.image || defaultProjectImage,
+          image: resolveImageUrl(project.image, fallback.image || defaultProjectImage),
         }
       })
     : initialContent.projects
@@ -45,7 +59,7 @@ function normalizePortfolioContent(content) {
         return {
           ...fallback,
           ...certificate,
-          image: isDeployableImageUrl(certificate.image) ? certificate.image : fallback.image || defaultCertificateImage,
+          image: resolveImageUrl(certificate.image, fallback.image || defaultCertificateImage),
         }
       })
     : initialContent.certifications

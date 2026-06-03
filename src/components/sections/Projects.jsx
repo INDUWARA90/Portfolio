@@ -1,4 +1,5 @@
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi'
+import fallbackProjectImage from '../../assets/P01.png'
 import SectionHeader from '../ui/SectionHeader'
 
 function Projects({ projects }) {
@@ -17,7 +18,7 @@ function Projects({ projects }) {
                   className="h-56 w-full object-cover"
                   loading="lazy"
                   onError={(event) => {
-                    event.currentTarget.remove()
+                    event.currentTarget.src = fallbackProjectImage
                   }}
                 />
               )}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import fallbackCertificateImage from '../../assets/P01.png'
 import SectionHeader from '../ui/SectionHeader'
 
 function Certificates({ certifications }) {
@@ -19,7 +20,7 @@ function Certificates({ certifications }) {
                     className="h-56 w-full object-cover transition duration-500 hover:scale-105"
                     loading="lazy"
                     onError={(event) => {
-                      event.currentTarget.remove()
+                      event.currentTarget.src = fallbackCertificateImage
                     }}
                   />
                 )}
@@ -42,7 +43,7 @@ function Certificates({ certifications }) {
                 alt={selected.title}
                 className="w-full rounded-md"
                 onError={(event) => {
-                  event.currentTarget.remove()
+                  event.currentTarget.src = fallbackCertificateImage
                 }}
               />
             )}
