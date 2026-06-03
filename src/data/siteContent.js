@@ -18,7 +18,12 @@ export const initialContent = {
   },
   socials: [],
   stats: [],
-  skills: [],
+  skills: [
+    { name: 'Postman', category: 'API Testing' },
+    { name: '.NET', category: 'Backend' },
+    { name: 'Next.js', category: 'Frontend Framework' },
+    { name: 'Angular', category: 'Frontend Framework' },
+  ],
   services: [],
   projects: [
     {
@@ -26,12 +31,8 @@ export const initialContent = {
       title: '',
       image: projectImage,
       status: '',
-      featured: false,
       category: '',
       description: '',
-      problem: '',
-      role: '',
-      features: [],
       techstack: [],
       dlink: '',
       clink: '',
@@ -56,6 +57,5 @@ export const initialContent = {
     followers: '',
     following: '',
     publicRepos: '',
-    starredRepos: '',
   },
 }

@@ -5,7 +5,7 @@ import { auth } from '../../lib/firebase'
 import { deleteContactMessage, getContactMessages } from '../../lib/messages'
 import ImageUploader from './ImageUploader'
 
-const tabs = ['profile', 'projects', 'skills', 'socials', 'messages']
+const tabs = ['profile', 'projects', 'skills', 'experience', 'certificates', 'testimonials', 'github', 'socials', 'messages']
 const profileFields = ['name', 'role', 'email', 'phone', 'location', 'intro', 'story', 'objective']
 
 function toList(value) {
@@ -105,6 +105,34 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
     }))
   }
 
+  function updateListItem(collection, index, field, value) {
+    setDraft((current) => ({
+      ...current,
+      [collection]: (current[collection] || []).map((item, itemIndex) => (itemIndex === index ? { ...item, [field]: value } : item)),
+    }))
+  }
+
+  function addListItem(collection, item) {
+    setDraft((current) => ({
+      ...current,
+      [collection]: [item, ...(current[collection] || [])],
+    }))
+  }
+
+  function deleteListItem(collection, index) {
+    setDraft((current) => ({
+      ...current,
+      [collection]: (current[collection] || []).filter((_, itemIndex) => itemIndex !== index),
+    }))
+  }
+
+  function updateGithub(field, value) {
+    setDraft((current) => ({
+      ...current,
+      github: { ...current.github, [field]: value },
+    }))
+  }
+
   function addProject() {
     setDraft((current) => ({
       ...current,
@@ -114,12 +142,8 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
           title: 'New Project',
           image: '',
           status: 'Draft',
-          featured: false,
           category: 'React',
           description: 'Write a short project description.',
-          problem: '',
-          role: 'Developer',
-          features: ['Responsive layout'],
           techstack: ['React'],
           dlink: '',
           clink: '',
@@ -265,6 +289,61 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
                   />
                 </label>
               ))}
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Resume URL
+                <input
+                  value={draft.profile.resumeUrl || ''}
+                  onChange={(event) => updateProfile('resumeUrl', event.target.value)}
+                  placeholder="https://..."
+                  className="mt-2 dashboard-input"
+                />
+              </label>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Technical interests
+                <input
+                  value={(draft.profile.interests || []).join(', ')}
+                  onChange={(event) => updateProfile('interests', toList(event.target.value))}
+                  placeholder="React, UI Design, Firebase"
+                  className="mt-2 dashboard-input"
+                />
+              </label>
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Services
+                <input
+                  value={(draft.services || []).join(', ')}
+                  onChange={(event) => setDraft((current) => ({ ...current, services: toList(event.target.value) }))}
+                  placeholder="Web apps, Landing pages, Firebase setup"
+                  className="mt-2 dashboard-input"
+                />
+              </label>
+            </div>
+
+            <div className="rounded-md border border-white/10 p-4 light:border-slate-200">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h3 className="text-lg font-black">Hero Stats</h3>
+                <button
+                  onClick={() => addListItem('stats', { value: '1+', label: 'New stat' })}
+                  className="btn-primary gap-2 px-3 py-2 text-sm"
+                >
+                  <FiPlus />
+                  Add Stat
+                </button>
+              </div>
+              <div className="grid gap-3 md:grid-cols-3">
+                {(draft.stats || []).map((stat, index) => (
+                  <div key={`${stat.label}-${index}`} className="grid gap-3 rounded-md border border-white/10 p-4 light:border-slate-200">
+                    <input value={stat.value || ''} onChange={(event) => updateListItem('stats', index, 'value', event.target.value)} placeholder="Value" className="dashboard-input" />
+                    <input value={stat.label || ''} onChange={(event) => updateListItem('stats', index, 'label', event.target.value)} placeholder="Label" className="dashboard-input" />
+                    <button onClick={() => deleteListItem('stats', index)} className="inline-flex w-fit items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                      <FiTrash2 />
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -322,6 +401,182 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'experience' && (
+          <div className="mt-6 space-y-8">
+            <section>
+              <button
+                onClick={() => addListItem('experience', {
+                  title: 'New Experience',
+                  company: 'Company / Project',
+                  period: '2026',
+                  type: 'Project',
+                  description: 'Describe what you built or contributed.',
+                  technologies: ['React'],
+                })}
+                className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
+              >
+                <FiPlus />
+                Add Experience
+              </button>
+
+              <div className="space-y-4">
+                {(draft.experience || []).map((item, index) => (
+                  <article key={`${item.title}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                    <div className="grid gap-3 md:grid-cols-2">
+                      <input value={item.title || ''} onChange={(event) => updateListItem('experience', index, 'title', event.target.value)} placeholder="Title" className="dashboard-input" />
+                      <input value={item.company || ''} onChange={(event) => updateListItem('experience', index, 'company', event.target.value)} placeholder="Company / project" className="dashboard-input" />
+                      <input value={item.period || ''} onChange={(event) => updateListItem('experience', index, 'period', event.target.value)} placeholder="Period" className="dashboard-input" />
+                      <input value={item.type || ''} onChange={(event) => updateListItem('experience', index, 'type', event.target.value)} placeholder="Type" className="dashboard-input" />
+                      <textarea value={item.description || ''} onChange={(event) => updateListItem('experience', index, 'description', event.target.value)} placeholder="Description" className="dashboard-input md:col-span-2" />
+                      <input value={(item.technologies || []).join(', ')} onChange={(event) => updateListItem('experience', index, 'technologies', toList(event.target.value))} placeholder="React, Firebase, Tailwind" className="dashboard-input md:col-span-2" />
+                    </div>
+                    <button onClick={() => deleteListItem('experience', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                      <FiTrash2 />
+                      Delete
+                    </button>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <button
+                onClick={() => addListItem('education', {
+                  institution: 'New Education',
+                  degree: 'Degree / Course',
+                  period: '2026',
+                  coursework: ['Web development'],
+                })}
+                className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
+              >
+                <FiPlus />
+                Add Education
+              </button>
+
+              <div className="space-y-4">
+                {(draft.education || []).map((item, index) => (
+                  <article key={`${item.institution}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                    <div className="grid gap-3 md:grid-cols-2">
+                      <input value={item.institution || ''} onChange={(event) => updateListItem('education', index, 'institution', event.target.value)} placeholder="Institution" className="dashboard-input" />
+                      <input value={item.degree || ''} onChange={(event) => updateListItem('education', index, 'degree', event.target.value)} placeholder="Degree / course" className="dashboard-input" />
+                      <input value={item.period || ''} onChange={(event) => updateListItem('education', index, 'period', event.target.value)} placeholder="Period" className="dashboard-input md:col-span-2" />
+                      <input value={(item.coursework || []).join(', ')} onChange={(event) => updateListItem('education', index, 'coursework', toList(event.target.value))} placeholder="Coursework" className="dashboard-input md:col-span-2" />
+                    </div>
+                    <button onClick={() => deleteListItem('education', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                      <FiTrash2 />
+                      Delete
+                    </button>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {tab === 'certificates' && (
+          <div className="mt-6">
+            <button
+              onClick={() => addListItem('certifications', {
+                id: crypto.randomUUID(),
+                title: 'New Certificate',
+                issuer: 'Issuer',
+                year: '2026',
+                image: '',
+                verification: '',
+                category: 'Course',
+              })}
+              className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
+            >
+              <FiPlus />
+              Add Certificate
+            </button>
+
+            <div className="space-y-4">
+              {(draft.certifications || []).map((certificate, index) => (
+                <article key={`${certificate.id}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <input value={certificate.title || ''} onChange={(event) => updateListItem('certifications', index, 'title', event.target.value)} placeholder="Title" className="dashboard-input" />
+                    <input value={certificate.issuer || ''} onChange={(event) => updateListItem('certifications', index, 'issuer', event.target.value)} placeholder="Issuer" className="dashboard-input" />
+                    <input value={certificate.year || ''} onChange={(event) => updateListItem('certifications', index, 'year', event.target.value)} placeholder="Year" className="dashboard-input" />
+                    <input value={certificate.category || ''} onChange={(event) => updateListItem('certifications', index, 'category', event.target.value)} placeholder="Category" className="dashboard-input" />
+                    <input value={certificate.verification || ''} onChange={(event) => updateListItem('certifications', index, 'verification', event.target.value)} placeholder="Verification link" className="dashboard-input md:col-span-2" />
+                    <div className="md:col-span-2">
+                      <ImageUploader
+                        folder="portfolio/certificates"
+                        imageUrl={certificate.image}
+                        label={`${certificate.title} certificate`}
+                        onUploaded={(url) => updateListItem('certifications', index, 'image', url)}
+                      />
+                    </div>
+                  </div>
+                  <button onClick={() => deleteListItem('certifications', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                    <FiTrash2 />
+                    Delete
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'testimonials' && (
+          <div className="mt-6">
+            <button
+              onClick={() => addListItem('testimonials', {
+                quote: 'Write a short testimonial or working-style note.',
+                name: 'Client / Collaborator',
+                role: 'Role or context',
+              })}
+              className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
+            >
+              <FiPlus />
+              Add Testimonial
+            </button>
+
+            <div className="space-y-4">
+              {(draft.testimonials || []).map((testimonial, index) => (
+                <article key={`${testimonial.name}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <input value={testimonial.name || ''} onChange={(event) => updateListItem('testimonials', index, 'name', event.target.value)} placeholder="Name" className="dashboard-input" />
+                    <input value={testimonial.role || ''} onChange={(event) => updateListItem('testimonials', index, 'role', event.target.value)} placeholder="Role / context" className="dashboard-input" />
+                    <textarea value={testimonial.quote || ''} onChange={(event) => updateListItem('testimonials', index, 'quote', event.target.value)} placeholder="Quote" className="dashboard-input md:col-span-2" />
+                  </div>
+                  <button onClick={() => deleteListItem('testimonials', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                    <FiTrash2 />
+                    Delete
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'github' && (
+          <div className="mt-6 max-w-3xl space-y-4">
+            <p className="rounded-md border border-white/10 p-4 text-sm text-slate-300 light:border-slate-200 light:text-slate-700">
+              The public GitHub panel fetches live data from the username below. The stat fields are used as fallback values if GitHub is unavailable.
+            </p>
+            <label className="block text-sm font-bold text-slate-300 light:text-slate-700">
+              GitHub username
+              <input value={draft.github?.username || ''} onChange={(event) => updateGithub('username', event.target.value)} placeholder="yourusername" className="mt-2 dashboard-input" />
+            </label>
+            <div className="grid gap-3 md:grid-cols-3">
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Public repos fallback
+                <input value={draft.github?.publicRepos || ''} onChange={(event) => updateGithub('publicRepos', event.target.value)} className="mt-2 dashboard-input" />
+              </label>
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Followers fallback
+                <input value={draft.github?.followers || ''} onChange={(event) => updateGithub('followers', event.target.value)} className="mt-2 dashboard-input" />
+              </label>
+              <label className="text-sm font-bold text-slate-300 light:text-slate-700">
+                Following fallback
+                <input value={draft.github?.following || ''} onChange={(event) => updateGithub('following', event.target.value)} className="mt-2 dashboard-input" />
+              </label>
             </div>
           </div>
         )}

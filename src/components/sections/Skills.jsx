@@ -1,10 +1,13 @@
 import { FaCss3Alt, FaGitAlt, FaGithub, FaHtml5, FaNodeJs, FaReact } from 'react-icons/fa'
 import {
+  SiAngular,
+  SiDotnet,
   SiExpress,
   SiFirebase,
   SiJavascript,
   SiMongodb,
   SiMysql,
+  SiNextdotjs,
   SiPostman,
   SiTailwindcss,
 } from 'react-icons/si'
@@ -26,6 +29,12 @@ const skillIcons = {
   Git: FaGitAlt,
   GitHub: FaGithub,
   Postman: SiPostman,
+  '.NET': SiDotnet,
+  DotNet: SiDotnet,
+  'Next.js': SiNextdotjs,
+  'Next JS': SiNextdotjs,
+  NextJS: SiNextdotjs,
+  Angular: SiAngular,
   'VS Code': VscVscode,
 }
 

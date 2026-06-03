@@ -3,6 +3,25 @@ import fallbackProjectImage from '../../assets/P01.png'
 import SectionHeader from '../ui/SectionHeader'
 
 function Projects({ projects }) {
+  function renderProjectActions(project, className = '') {
+    return (
+      <div className={`flex flex-wrap gap-3 ${className}`}>
+        {project.dlink && (
+          <a href={project.dlink} target="_blank" rel="noreferrer" className="btn-primary gap-2 px-4 py-2 text-sm">
+            Live Demo
+            <FiArrowUpRight />
+          </a>
+        )}
+        {project.clink && (
+          <a href={project.clink} target="_blank" rel="noreferrer" className="btn-secondary gap-2 px-4 py-2 text-sm">
+            <FiGithub />
+            Code
+          </a>
+        )}
+      </div>
+    )
+  }
+
   return (
     <section id="projects" className="section-band px-4 py-20 md:px-8">
       <div className="mx-auto max-w-6xl">
@@ -36,28 +55,17 @@ function Projects({ projects }) {
 
                 <p className="mt-4 leading-7 text-[#1F6F5F]/76 light:text-slate-700">{project.description}</p>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.techstack.map((item) => (
-                    <span key={item} className="rounded-md border border-[#2FA084]/12 bg-white/68 px-3 py-2 text-xs font-semibold text-[#1F6F5F] light:border-slate-200 light:bg-slate-50 light:text-slate-700">
-                      {item}
-                    </span>
-                  ))}
-                </div>
+                {project.techstack?.length > 0 && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.techstack.map((item) => (
+                      <span key={item} className="rounded-md border border-[#2FA084]/12 bg-white/68 px-3 py-2 text-xs font-semibold text-[#1F6F5F] light:border-slate-200 light:bg-slate-50 light:text-slate-700">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {project.dlink && (
-                    <a href={project.dlink} target="_blank" rel="noreferrer" className="btn-primary gap-2 px-4 py-2 text-sm">
-                      Live Demo
-                      <FiArrowUpRight />
-                    </a>
-                  )}
-                  {project.clink && (
-                    <a href={project.clink} target="_blank" rel="noreferrer" className="btn-secondary gap-2 px-4 py-2 text-sm">
-                      <FiGithub />
-                      Code
-                    </a>
-                  )}
-                </div>
+                {renderProjectActions(project, 'mt-6')}
               </div>
             </article>
           ))}

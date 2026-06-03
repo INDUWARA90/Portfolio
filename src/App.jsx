@@ -8,11 +8,15 @@ import Header from './components/layout/Header'
 import About from './components/sections/About'
 import Certificates from './components/sections/Certificates'
 import Contact from './components/sections/Contact'
+import ContactCta from './components/sections/ContactCta'
 import Experience from './components/sections/Experience'
 import GithubPanel from './components/sections/GithubPanel'
 import Hero from './components/sections/Hero'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
+import TechMarquee from './components/sections/TechMarquee'
+import Testimonials from './components/sections/Testimonials'
+import Reveal from './components/ui/Reveal'
 import { initialContent } from './data/siteContent'
 import { auth } from './lib/firebase'
 import { getPortfolioContent, getSafePortfolioContent, resetPortfolioContent, savePortfolioContent } from './lib/portfolioContent'
@@ -117,14 +121,37 @@ export default function App() {
       />
 
       <main className="relative z-10">
-        <Hero profile={content.profile} socials={content.socials} stats={content.stats} />
-        <About profile={content.profile} services={content.services} />
-        <Skills skills={content.skills} />
-        <Projects projects={content.projects} />
-        <Experience experience={content.experience} education={content.education} />
-        <Certificates certifications={content.certifications} />
-        <GithubPanel github={content.github} socials={content.socials} />
-        <Contact profile={content.profile} />
+        <Reveal>
+          <Hero profile={content.profile} socials={content.socials} stats={content.stats} />
+        </Reveal>
+        <TechMarquee skills={content.skills} />
+        <Reveal>
+          <About profile={content.profile} services={content.services} />
+        </Reveal>
+        <Reveal>
+          <Skills skills={content.skills} />
+        </Reveal>
+        <Reveal>
+          <Projects projects={content.projects} />
+        </Reveal>
+        <Reveal>
+          <Experience experience={content.experience} education={content.education} />
+        </Reveal>
+        <Reveal>
+          <Certificates certifications={content.certifications} />
+        </Reveal>
+        <Reveal>
+          <GithubPanel github={content.github} socials={content.socials} />
+        </Reveal>
+        <Reveal>
+          <Testimonials testimonials={content.testimonials} />
+        </Reveal>
+        <Reveal>
+          <Contact profile={content.profile} />
+        </Reveal>
+        <Reveal>
+          <ContactCta profile={content.profile} />
+        </Reveal>
       </main>
 
       <Footer profile={content.profile} socials={content.socials} />
