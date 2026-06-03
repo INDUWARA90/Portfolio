@@ -52,18 +52,24 @@ function Contact({ profile }) {
             </p>
 
             <div className="mt-7 space-y-4 text-sm font-bold">
-              <a className="flex items-center gap-3 rounded-md bg-white/55 p-4 transition hover:bg-white/80" href={`mailto:${profile.email}`}>
-                <FiMail />
-                {profile.email}
-              </a>
-              <a className="flex items-center gap-3 rounded-md bg-white/55 p-4 transition hover:bg-white/80" href={`tel:${profile.phone.replaceAll(' ', '')}`}>
-                <FiPhone />
-                {profile.phone}
-              </a>
-              <p className="flex items-center gap-3 rounded-md bg-white/55 p-4">
-                <FiMapPin />
-                {profile.location}
-              </p>
+              {profile.email && (
+                <a className="flex items-center gap-3 rounded-md bg-white/55 p-4 transition hover:bg-white/80" href={`mailto:${profile.email}`}>
+                  <FiMail />
+                  {profile.email}
+                </a>
+              )}
+              {profile.phone && (
+                <a className="flex items-center gap-3 rounded-md bg-white/55 p-4 transition hover:bg-white/80" href={`tel:${profile.phone.replaceAll(' ', '')}`}>
+                  <FiPhone />
+                  {profile.phone}
+                </a>
+              )}
+              {profile.location && (
+                <p className="flex items-center gap-3 rounded-md bg-white/55 p-4">
+                  <FiMapPin />
+                  {profile.location}
+                </p>
+              )}
             </div>
           </aside>
 

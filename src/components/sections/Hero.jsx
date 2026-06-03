@@ -1,4 +1,5 @@
 import { FiArrowUpRight, FiDownload } from 'react-icons/fi'
+import fallbackProfileImage from '../../assets/Me.jpg'
 
 function Hero({ profile, socials, stats }) {
   const visibleStats = stats.slice(0, 3)
@@ -42,15 +43,20 @@ function Hero({ profile, socials, stats }) {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md">
-          <div className="profile-frame">
-            <img src={profile.image} alt={profile.name} className="aspect-[4/5] w-full rounded-md object-cover" />
-            <div className="absolute bottom-5 left-5 right-5 rounded-md bg-[#101828]/88 p-4 text-sm text-white shadow-2xl backdrop-blur light:border light:border-slate-200 light:bg-white/95 light:text-slate-950">
-              <p className="font-bold text-teal-300 light:text-sky-700">Currently building</p>
-              <p className="mt-1 text-slate-300 light:text-slate-700">React apps and clean product interfaces.</p>
+        {profile.image && (
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="profile-frame">
+              <img
+                src={profile.image}
+                alt={profile.name || 'Profile'}
+                className="aspect-[4/5] w-full rounded-md object-cover"
+                onError={(event) => {
+                  event.currentTarget.src = fallbackProfileImage
+                }}
+              />
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

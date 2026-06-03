@@ -13,7 +13,7 @@ import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
 import { initialContent } from './data/siteContent'
 import { auth } from './lib/firebase'
-import { getPortfolioContent, resetPortfolioContent, savePortfolioContent } from './lib/portfolioContent'
+import { getPortfolioContent, getSafePortfolioContent, resetPortfolioContent, savePortfolioContent } from './lib/portfolioContent'
 
 export default function App() {
   const [content, setContent] = useState(initialContent)
@@ -58,8 +58,9 @@ export default function App() {
   }, [])
 
   async function updateContent(nextContent) {
-    await savePortfolioContent(nextContent)
-    setContent(nextContent)
+    const safeContent = getSafePortfolioContent(nextContent)
+    await savePortfolioContent(safeContent)
+    setContent(safeContent)
   }
 
   async function resetContent() {
@@ -94,6 +95,7 @@ export default function App() {
       )}
 
       <Header
+        profile={content.profile}
         socials={content.socials}
         onOpenDashboard={() => setDashboardOpen(true)}
       />

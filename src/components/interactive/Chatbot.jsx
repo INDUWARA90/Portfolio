@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 function Chatbot({ content }) {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Ask me about Induwara, skills, projects, experience, or contact details.' },
+    { from: 'bot', text: 'Ask me about skills, projects, experience, or contact details.' },
   ])
   const [input, setInput] = useState('')
 
@@ -17,11 +17,11 @@ function Chatbot({ content }) {
 
   function answerQuestion(question) {
     const lower = question.toLowerCase()
-    if (lower.includes('skill') || lower.includes('technology')) return `Induwara works with ${knowledge.skills}.`
+    if (lower.includes('skill') || lower.includes('technology')) return knowledge.skills ? `Skills include ${knowledge.skills}.` : 'Skills will be added soon.'
     if (lower.includes('project') || lower.includes('best')) return `Highlighted projects include ${knowledge.projects}`
     if (lower.includes('experience')) return `Experience includes ${knowledge.experience}.`
-    if (lower.includes('contact') || lower.includes('email')) return `You can contact Induwara at ${knowledge.contact}.`
-    return knowledge.about
+    if (lower.includes('contact') || lower.includes('email')) return knowledge.contact.trim() ? `Contact details: ${knowledge.contact}.` : 'Contact details will be added soon.'
+    return knowledge.about.trim() || 'Portfolio details will be added soon.'
   }
 
   function handleSubmit(event) {

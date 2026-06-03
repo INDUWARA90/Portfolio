@@ -1,4 +1,4 @@
-# Induwara Vishwakantha Portfolio
+# Portfolio
 
 A modern recruiter-focused portfolio built with React, Vite, Tailwind CSS, Motion, React Icons, and Firebase.
 

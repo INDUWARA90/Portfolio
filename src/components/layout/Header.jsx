@@ -10,10 +10,11 @@ const navItems = [
   ['Contact', '#contact'],
 ]
 
-function Header({ socials, onOpenDashboard }) {
+function Header({ profile, socials, onOpenDashboard }) {
   const [isOpen, setIsOpen] = useState(false)
   const github = socials.find((social) => social.label === 'GitHub')?.href
   const linkedin = socials.find((social) => social.label === 'LinkedIn')?.href
+  const brand = profile.name || 'Portfolio'
 
   const closeSidebar = () => setIsOpen(false)
 
@@ -21,7 +22,7 @@ function Header({ socials, onOpenDashboard }) {
     <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 text-white light:text-slate-950">
       <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-md border border-white/10 bg-[#101828]/78 px-4 py-3 shadow-[0_18px_60px_rgba(16,24,40,0.22)] backdrop-blur-2xl light:border-slate-200 light:bg-white/95 light:shadow-[0_16px_45px_rgba(15,23,42,0.1)] md:px-5">
         <a href="#home" className="text-lg font-extrabold tracking-tight">
-          INDUWARA<span className="text-teal-300 light:text-sky-600">.</span>
+          {brand}<span className="text-teal-300 light:text-sky-600">.</span>
         </a>
 
         <ul className="hidden items-center gap-5 text-sm font-semibold text-slate-300 light:text-slate-700 lg:flex">

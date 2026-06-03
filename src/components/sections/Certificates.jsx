@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import fallbackCertificateImage from '../../assets/P01.png'
 import SectionHeader from '../ui/SectionHeader'
 
 function Certificates({ certifications }) {
@@ -12,7 +13,15 @@ function Certificates({ certifications }) {
           {certifications.map((certificate) => (
             <button key={certificate.id} onClick={() => setSelected(certificate)} className="premium-card overflow-hidden rounded-md text-left">
               <div className="overflow-hidden">
-                <img src={certificate.image} alt={certificate.title} className="h-56 w-full object-cover transition duration-500 hover:scale-105" loading="lazy" />
+                <img
+                  src={certificate.image}
+                  alt={certificate.title}
+                  className="h-56 w-full object-cover transition duration-500 hover:scale-105"
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.src = fallbackCertificateImage
+                  }}
+                />
               </div>
               <div className="p-5">
                 <p className="text-sm text-cyan-300">{certificate.issuer} / {certificate.year}</p>
@@ -26,7 +35,14 @@ function Certificates({ certifications }) {
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/80 p-4 backdrop-blur">
           <div className="glass-panel w-full max-w-2xl rounded-md p-5">
             <button onClick={() => setSelected(null)} className="btn-secondary mb-4 px-3 py-2 text-sm">Close</button>
-            <img src={selected.image} alt={selected.title} className="w-full rounded-md" />
+            <img
+              src={selected.image}
+              alt={selected.title}
+              className="w-full rounded-md"
+              onError={(event) => {
+                event.currentTarget.src = fallbackCertificateImage
+              }}
+            />
           </div>
         </div>
       )}

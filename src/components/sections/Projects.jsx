@@ -1,4 +1,5 @@
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi'
+import fallbackProjectImage from '../../assets/P01.png'
 import SectionHeader from '../ui/SectionHeader'
 
 function Projects({ projects }) {
@@ -10,7 +11,15 @@ function Projects({ projects }) {
         <div className="grid gap-6 lg:grid-cols-2">
           {projects.map((project) => (
             <article key={project.id} className="premium-card overflow-hidden rounded-md">
-              <img src={project.image} alt={`${project.title} screenshot`} className="h-56 w-full object-cover" loading="lazy" />
+              <img
+                src={project.image}
+                alt={`${project.title} screenshot`}
+                className="h-56 w-full object-cover"
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.src = fallbackProjectImage
+                }}
+              />
               <div className="p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
