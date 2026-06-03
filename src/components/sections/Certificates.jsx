@@ -7,7 +7,7 @@ function Certificates({ certifications }) {
   return (
     <section id="certificates" className="section-band px-4 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader eyebrow="Certificates" title="Proof of continuous learning" description="A gallery-style certificate area ready for Cloudinary-hosted certificate images and verification links." />
+        <SectionHeader eyebrow="Certificates" title="Proof of continuous learning" description="A gallery-style certificate area ready for hosted certificate images and verification links." />
         <div className="grid gap-6 md:grid-cols-2">
           {certifications.map((certificate) => (
             <button key={certificate.id} onClick={() => setSelected(certificate)} className="premium-card overflow-hidden rounded-md text-left">

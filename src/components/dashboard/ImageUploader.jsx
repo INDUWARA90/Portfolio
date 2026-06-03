@@ -82,6 +82,16 @@ function ImageUploader({ folder, imageUrl, label, onUploaded }) {
         </div>
       )}
 
+      <label className="mt-3 block text-sm font-bold text-slate-300 light:text-slate-700">
+        Image URL
+        <input
+          value={imageUrl || ''}
+          onChange={(event) => onUploaded(event.target.value)}
+          placeholder="https://..."
+          className="dashboard-input mt-2"
+        />
+      </label>
+
       {error && <p className="mt-3 text-sm text-red-300">{error}</p>}
     </div>
   )

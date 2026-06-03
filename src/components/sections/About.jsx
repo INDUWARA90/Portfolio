@@ -1,7 +1,6 @@
 import SectionHeader from '../ui/SectionHeader'
 
 function About({ profile, services }) {
-  console.log(profile);
   
   return (
     <section id="about" className="section-band px-4 py-20 md:px-8">

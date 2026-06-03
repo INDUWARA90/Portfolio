@@ -15,15 +15,35 @@ function toList(value) {
 function AdminDashboard({ content, setContent, onReset, onClose }) {
   const [tab, setTab] = useState('profile')
   const [draft, setDraft] = useState(content)
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
 
-  function saveChanges() {
-    setContent(draft)
-    onClose()
+  async function saveChanges() {
+    setIsSaving(true)
+    setSaveError('')
+
+    try {
+      await setContent(draft)
+      onClose()
+    } catch (error) {
+      setSaveError(error.message)
+    } finally {
+      setIsSaving(false)
+    }
   }
 
-  function resetContent() {
-    onReset()
-    onClose()
+  async function resetContent() {
+    setIsSaving(true)
+    setSaveError('')
+
+    try {
+      await onReset()
+      onClose()
+    } catch (error) {
+      setSaveError(error.message)
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   function updateProfile(field, value) {
@@ -120,22 +140,24 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.24em] text-teal-300 light:text-sky-700">Dashboard</p>
             <h2 className="mt-2 text-3xl font-black">Manage Portfolio</h2>
-            <p className="mt-2 text-sm text-slate-400 light:text-slate-600">Changes are saved in this browser.</p>
+            <p className="mt-2 text-sm text-slate-400 light:text-slate-600">Changes are saved to Firebase Firestore.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button onClick={resetContent} className="btn-secondary gap-2 px-4 py-2 text-sm">
+            <button onClick={resetContent} disabled={isSaving} className="btn-secondary gap-2 px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60">
               <FiRotateCcw />
               Reset
             </button>
-            <button onClick={saveChanges} className="btn-primary gap-2 px-4 py-2 text-sm">
+            <button onClick={saveChanges} disabled={isSaving} className="btn-primary gap-2 px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60">
               <FiSave />
-              Save
+              {isSaving ? 'Saving' : 'Save'}
             </button>
             <button onClick={onClose} className="icon-button" aria-label="Close dashboard">
               <FiX />
             </button>
           </div>
         </div>
+
+        {saveError && <p className="mt-4 rounded-md border border-red-400/25 bg-red-500/10 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">{saveError}</p>}
 
         <div className="mt-5 flex flex-wrap gap-2">
           {tabs.map((item) => (
@@ -155,7 +177,7 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
           <div className="mt-6 space-y-5">
             <div className="rounded-md border border-white/10 p-4 light:border-slate-200">
               <h3 className="text-lg font-black">Profile Image</h3>
-              <p className="mt-1 text-sm text-slate-400 light:text-slate-600">Upload your profile photo to Cloudinary.</p>
+              <p className="mt-1 text-sm text-slate-400 light:text-slate-600">Upload to Cloudinary or paste a hosted image URL.</p>
               <div className="mt-4 max-w-md">
                 <ImageUploader
                   folder="portfolio/profile"

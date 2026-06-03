@@ -1,23 +1,37 @@
 import { useState } from 'react'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { FiLock, FiX } from 'react-icons/fi'
+import { auth } from '../../lib/firebase'
 
-const DASHBOARD_PASSWORD = '12345'
+const authMessages = {
+  'auth/configuration-not-found': 'Enable Email/Password sign-in in Firebase Authentication.',
+  'auth/invalid-credential': 'Email or password is incorrect.',
+  'auth/invalid-email': 'Enter a valid email address.',
+  'auth/missing-password': 'Enter your password.',
+  'auth/user-not-found': 'No Firebase user exists for this email.',
+  'auth/wrong-password': 'Email or password is incorrect.',
+}
 
 function DashboardLock({ onUnlock, onClose }) {
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isSigningIn, setIsSigningIn] = useState(false)
   const [error, setError] = useState('')
 
-  function submitPassword(event) {
+  async function submitPassword(event) {
     event.preventDefault()
+    setIsSigningIn(true)
+    setError('')
 
-    if (password === DASHBOARD_PASSWORD) {
-      setError('')
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
       onUnlock()
-      return
+    } catch (signInError) {
+      setError(authMessages[signInError.code] || signInError.message)
+      setPassword('')
+    } finally {
+      setIsSigningIn(false)
     }
-
-    setError('Incorrect password. Try again.')
-    setPassword('')
   }
 
   return (
@@ -29,7 +43,7 @@ function DashboardLock({ onUnlock, onClose }) {
               <FiLock />
             </div>
             <h2 className="mt-5 text-3xl font-black">Dashboard Locked</h2>
-            <p className="mt-2 text-sm text-slate-400">Enter the password to manage portfolio content.</p>
+            <p className="mt-2 text-sm text-slate-400">Sign in to manage portfolio content.</p>
           </div>
           <button type="button" onClick={onClose} className="icon-button" aria-label="Close dashboard lock">
             <FiX />
@@ -37,9 +51,20 @@ function DashboardLock({ onUnlock, onClose }) {
         </div>
 
         <label className="mt-6 block text-sm font-bold text-slate-300">
-          Password
+          Email
           <input
             autoFocus
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            type="email"
+            className="dashboard-input mt-2"
+            placeholder="you@example.com"
+          />
+        </label>
+
+        <label className="mt-6 block text-sm font-bold text-slate-300">
+          Password
+          <input
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             type="password"
@@ -52,7 +77,7 @@ function DashboardLock({ onUnlock, onClose }) {
 
         <button className="btn-primary mt-5 w-full gap-2 px-5 py-3 text-sm">
           <FiLock />
-          Unlock Dashboard
+          {isSigningIn ? 'Signing In' : 'Unlock Dashboard'}
         </button>
       </form>
     </div>
