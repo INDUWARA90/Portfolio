@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import { db } from './firebase'
 
 const MESSAGES_COLLECTION = collection(db, 'messages')
@@ -17,4 +17,8 @@ export async function getContactMessages() {
     id: messageDoc.id,
     ...messageDoc.data(),
   }))
+}
+
+export async function deleteContactMessage(messageId) {
+  await deleteDoc(doc(db, 'messages', messageId))
 }

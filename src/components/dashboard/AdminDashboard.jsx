@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FiInbox, FiMail, FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
-import { getContactMessages } from '../../lib/messages'
+import { deleteContactMessage, getContactMessages } from '../../lib/messages'
 import ImageUploader from './ImageUploader'
 
 const tabs = ['profile', 'projects', 'skills', 'socials', 'messages']
@@ -21,6 +21,7 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
   const [messages, setMessages] = useState([])
   const [messagesLoading, setMessagesLoading] = useState(false)
   const [messagesError, setMessagesError] = useState('')
+  const [deletingMessageId, setDeletingMessageId] = useState('')
 
   useEffect(() => {
     if (tab !== 'messages') return
@@ -168,6 +169,20 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
       ...current,
       socials: current.socials.filter((_, socialIndex) => socialIndex !== index),
     }))
+  }
+
+  async function deleteMessage(id) {
+    setDeletingMessageId(id)
+    setMessagesError('')
+
+    try {
+      await deleteContactMessage(id)
+      setMessages((current) => current.filter((message) => message.id !== id))
+    } catch (error) {
+      setMessagesError(error.message)
+    } finally {
+      setDeletingMessageId('')
+    }
   }
 
   return (
@@ -343,10 +358,20 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
                         {message.name} / {message.email}
                       </p>
                     </div>
-                    <a href={`mailto:${message.email}`} className="btn-secondary w-fit gap-2 px-3 py-2 text-sm">
-                      <FiMail />
-                      Reply
-                    </a>
+                    <div className="flex flex-wrap gap-2">
+                      <a href={`mailto:${message.email}`} className="btn-secondary w-fit gap-2 px-3 py-2 text-sm">
+                        <FiMail />
+                        Reply
+                      </a>
+                      <button
+                        onClick={() => deleteMessage(message.id)}
+                        disabled={deletingMessageId === message.id}
+                        className="inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 disabled:cursor-not-allowed disabled:opacity-60 light:text-red-700"
+                      >
+                        <FiTrash2 />
+                        {deletingMessageId === message.id ? 'Deleting' : 'Delete'}
+                      </button>
+                    </div>
                   </div>
 
                   <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-slate-300 light:text-slate-700">{message.message}</p>
