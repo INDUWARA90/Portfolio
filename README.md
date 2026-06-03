@@ -46,7 +46,7 @@ Copy `.env.example` to `.env` and add your Firebase values. Add the same variabl
 
 ## Before Deployment
 
-- Replace `public/resume.pdf` with your real resume.
+- Keep your resume PDF at `src/assets/CV.pdf`.
 - Add real project and certificate image URLs.
 - Add Firebase environment variables in Vercel.
 - Add Firestore rules from the Firebase Console.

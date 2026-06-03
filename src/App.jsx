@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
+import { FiAlertCircle, FiCloud } from 'react-icons/fi'
 import AdminDashboard from './components/dashboard/AdminDashboard'
 import DashboardLock from './components/dashboard/DashboardLock'
 import Footer from './components/layout/Footer'
@@ -69,8 +70,26 @@ export default function App() {
   return (
     <div className="page-shell min-h-screen overflow-x-hidden text-white">
       {(isContentLoading || contentError) && (
-        <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded-md border border-white/10 bg-slate-950/90 px-4 py-2 text-sm text-slate-200 shadow-xl">
-          {isContentLoading ? 'Loading portfolio content...' : `Firebase: ${contentError}`}
+        <div
+          className={`fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] max-w-md items-center gap-3 rounded-md border px-4 py-3 text-sm shadow-2xl backdrop-blur sm:w-96 ${
+            contentError
+              ? 'border-red-300/30 bg-red-950/85 text-red-100'
+              : 'border-teal-200/25 bg-slate-950/85 text-slate-100'
+          }`}
+        >
+          <span
+            className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${
+              contentError ? 'bg-red-300 text-red-950' : 'bg-teal-300 text-slate-950'
+            }`}
+          >
+            {contentError ? <FiAlertCircle /> : <FiCloud />}
+          </span>
+          <div>
+            <p className="font-black">{isContentLoading ? 'Syncing Portfolio' : 'Firebase Connection Issue'}</p>
+            <p className="mt-0.5 text-xs opacity-80">
+              {isContentLoading ? 'Loading the latest content from Firestore...' : contentError}
+            </p>
+          </div>
         </div>
       )}
 

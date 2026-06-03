@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi'
+import { sendContactMessage } from '../../lib/messages'
 import SectionHeader from '../ui/SectionHeader'
 
 function Contact({ profile }) {
@@ -9,20 +10,29 @@ function Contact({ profile }) {
     subject: '',
     message: '',
   })
+  const [isSending, setIsSending] = useState(false)
+  const [status, setStatus] = useState('')
+  const [error, setError] = useState('')
 
   function updateField(field, value) {
     setForm((current) => ({ ...current, [field]: value }))
   }
 
-  function sendMessage(event) {
+  async function sendMessage(event) {
     event.preventDefault()
+    setIsSending(true)
+    setStatus('')
+    setError('')
 
-    const subject = encodeURIComponent(form.subject || 'Portfolio inquiry')
-    const body = encodeURIComponent(
-      `Hi Induwara,\n\n${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`,
-    )
-
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+    try {
+      await sendContactMessage(form)
+      setForm({ name: '', email: '', subject: '', message: '' })
+      setStatus('Message sent successfully.')
+    } catch (sendError) {
+      setError(sendError.message)
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -105,9 +115,12 @@ function Contact({ profile }) {
               />
             </label>
 
-            <button className="btn-primary mt-5 gap-2 px-5 py-3 text-sm">
+            {status && <p className="mt-4 text-sm font-bold text-teal-300 light:text-sky-700">{status}</p>}
+            {error && <p className="mt-4 text-sm font-bold text-red-300 light:text-red-700">{error}</p>}
+
+            <button disabled={isSending} className="btn-primary mt-5 gap-2 px-5 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-60">
               <FiSend />
-              Send Message
+              {isSending ? 'Sending' : 'Send Message'}
             </button>
           </form>
         </div>

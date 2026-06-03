@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { useEffect, useState } from 'react'
+import { FiInbox, FiMail, FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { getContactMessages } from '../../lib/messages'
 import ImageUploader from './ImageUploader'
 
-const tabs = ['profile', 'projects', 'skills', 'socials']
+const tabs = ['profile', 'projects', 'skills', 'socials', 'messages']
 const profileFields = ['name', 'role', 'email', 'phone', 'location', 'intro', 'story', 'objective']
 
 function toList(value) {
@@ -17,6 +18,42 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
   const [draft, setDraft] = useState(content)
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
+  const [messages, setMessages] = useState([])
+  const [messagesLoading, setMessagesLoading] = useState(false)
+  const [messagesError, setMessagesError] = useState('')
+
+  useEffect(() => {
+    if (tab !== 'messages') return
+
+    let isMounted = true
+
+    async function loadMessages() {
+      setMessagesLoading(true)
+      setMessagesError('')
+
+      try {
+        const savedMessages = await getContactMessages()
+
+        if (isMounted) {
+          setMessages(savedMessages)
+        }
+      } catch (error) {
+        if (isMounted) {
+          setMessagesError(error.message)
+        }
+      } finally {
+        if (isMounted) {
+          setMessagesLoading(false)
+        }
+      }
+    }
+
+    loadMessages()
+
+    return () => {
+      isMounted = false
+    }
+  }, [tab])
 
   async function saveChanges() {
     setIsSaving(true)
@@ -277,6 +314,48 @@ function AdminDashboard({ content, setContent, onReset, onClose }) {
                     Delete
                   </button>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'messages' && (
+          <div className="mt-6">
+            <div className="mb-4 flex items-center gap-3">
+              <FiInbox className="text-xl text-teal-300" />
+              <h3 className="text-xl font-black">Contact Messages</h3>
+            </div>
+
+            {messagesLoading && <p className="text-sm text-slate-400 light:text-slate-600">Loading messages...</p>}
+            {messagesError && <p className="rounded-md border border-red-400/25 bg-red-500/10 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">{messagesError}</p>}
+
+            {!messagesLoading && !messagesError && messages.length === 0 && (
+              <p className="rounded-md border border-white/10 p-4 text-sm text-slate-400 light:border-slate-200 light:text-slate-600">No messages yet.</p>
+            )}
+
+            <div className="space-y-4">
+              {messages.map((message) => (
+                <article key={message.id} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                  <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <h4 className="text-lg font-black text-white light:text-slate-950">{message.subject || 'Portfolio inquiry'}</h4>
+                      <p className="mt-1 text-sm text-slate-400 light:text-slate-600">
+                        {message.name} / {message.email}
+                      </p>
+                    </div>
+                    <a href={`mailto:${message.email}`} className="btn-secondary w-fit gap-2 px-3 py-2 text-sm">
+                      <FiMail />
+                      Reply
+                    </a>
+                  </div>
+
+                  <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-slate-300 light:text-slate-700">{message.message}</p>
+                  {message.createdAt?.toDate && (
+                    <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-slate-500 light:text-slate-500">
+                      {message.createdAt.toDate().toLocaleString()}
+                    </p>
+                  )}
+                </article>
               ))}
             </div>
           </div>

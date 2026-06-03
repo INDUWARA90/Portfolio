@@ -1,5 +1,6 @@
 import profileImage from '../assets/Me.jpg'
 import projectImage from '../assets/P01.png'
+import cvPdf from '../assets/CV.pdf'
 
 export const initialContent = {
   profile: {
@@ -9,7 +10,7 @@ export const initialContent = {
     email: 'induwaravishwakantha90@gmail.com',
     phone: '+94 76 569 4015',
     image: profileImage,
-    resumeUrl: '/resume.pdf',
+    resumeUrl: cvPdf,
     intro:
       'I build responsive, practical web applications with React, JavaScript, Firebase, Node.js, and clean UI systems.',
     story:
