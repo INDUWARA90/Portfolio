@@ -6,6 +6,7 @@ const CONTENT_DOC = doc(db, 'portfolio', 'content')
 
 function isDeployableImageUrl(value) {
   if (!value || typeof value !== 'string') return false
+  if (value.startsWith('/src/') || value.includes('/src/assets/')) return false
 
   return (
     value.startsWith('https://') ||

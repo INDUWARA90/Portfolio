@@ -1,5 +1,4 @@
 import { FiArrowUpRight, FiDownload } from 'react-icons/fi'
-import fallbackProfileImage from '../../assets/Me.jpg'
 
 function Hero({ profile, socials, stats }) {
   const visibleStats = stats.slice(0, 3)
@@ -51,7 +50,7 @@ function Hero({ profile, socials, stats }) {
                 alt={profile.name || 'Profile'}
                 className="aspect-[4/5] w-full rounded-md object-cover"
                 onError={(event) => {
-                  event.currentTarget.src = fallbackProfileImage
+                  event.currentTarget.closest('.profile-frame')?.classList.add('hidden')
                 }}
               />
             </div>
