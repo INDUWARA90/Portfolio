@@ -1,8 +1,13 @@
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi'
 import fallbackProjectImage from '../../assets/P01.png'
+import EmptyState from '../ui/EmptyState'
 import SectionHeader from '../ui/SectionHeader'
 
 function Projects({ projects }) {
+  const visibleProjects = Array.isArray(projects)
+    ? projects.filter((project) => project?.title || project?.description || project?.image)
+    : []
+
   function renderProjectActions(project, className = '') {
     return (
       <div className={`flex flex-wrap gap-3 ${className}`}>
@@ -27,9 +32,10 @@ function Projects({ projects }) {
       <div className="mx-auto max-w-6xl">
         <SectionHeader eyebrow="Projects" title="Selected work with live links" description="A small set of projects that show interface thinking, responsiveness, and practical JavaScript/React skills." />
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {projects.map((project) => (
-            <article key={project.id} className="premium-card overflow-hidden rounded-md">
+        {visibleProjects.length > 0 ? (
+          <div className="grid gap-6 lg:grid-cols-2">
+            {visibleProjects.map((project, index) => (
+            <article key={project.id || `${project.title}-${index}`} className="premium-card overflow-hidden rounded-md">
               {project.image && (
                 <div className="relative overflow-hidden">
                   <img
@@ -68,8 +74,11 @@ function Projects({ projects }) {
                 {renderProjectActions(project, 'mt-6')}
               </div>
             </article>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyState title="Projects coming soon" message="Selected work and live project links will be shared here soon." />
+        )}
       </div>
     </section>
   )

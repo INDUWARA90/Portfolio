@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react'
 import { signOut } from 'firebase/auth'
-import { FiInbox, FiMail, FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { FiInbox, FiPlus, FiRotateCcw, FiSave, FiTrash2, FiX } from 'react-icons/fi'
 import { auth } from '../../lib/firebase'
 import { deleteContactMessage, getContactMessages } from '../../lib/messages'
 import ImageUploader from './ImageUploader'
 
-const tabs = ['profile', 'projects', 'skills', 'experience', 'certificates', 'testimonials', 'github', 'socials', 'messages']
+const tabs = [
+  ['profile', 'Profile'],
+  ['projects', 'Projects'],
+  ['skills', 'Skills'],
+  ['experience', 'Experience'],
+  ['certificates', 'Certificates'],
+  ['feedback', 'Feedback'],
+  ['github', 'GitHub'],
+  ['socials', 'Socials'],
+  ['messages', 'Messages'],
+]
 const profileFields = ['name', 'role', 'email', 'phone', 'location', 'intro', 'story', 'objective']
 
 function toList(value) {
@@ -139,12 +149,12 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
       projects: [
         {
           id: crypto.randomUUID(),
-          title: 'New Project',
+          title: '',
           image: '',
-          status: 'Draft',
-          category: 'React',
-          description: 'Write a short project description.',
-          techstack: ['React'],
+          status: '',
+          category: '',
+          description: '',
+          techstack: [],
           dlink: '',
           clink: '',
         },
@@ -170,7 +180,7 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
   function addSkill() {
     setDraft((current) => ({
       ...current,
-      skills: [{ name: 'New Skill', category: 'Frontend', level: 70 }, ...current.skills],
+      skills: [{ name: '', category: '', level: '' }, ...current.skills],
     }))
   }
 
@@ -191,7 +201,7 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
   function addSocial() {
     setDraft((current) => ({
       ...current,
-      socials: [...current.socials, { label: 'New Link', href: 'https://' }],
+      socials: [...current.socials, { label: '', href: '' }],
     }))
   }
 
@@ -249,15 +259,15 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
         {saveError && <p className="mt-4 rounded-md border border-red-400/25 bg-red-500/10 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">{saveError}</p>}
 
         <div className="mt-5 flex flex-wrap gap-2">
-          {tabs.map((item) => (
+          {tabs.map(([id, label]) => (
             <button
-              key={item}
-              onClick={() => setTab(item)}
+              key={id}
+              onClick={() => setTab(id)}
               className={`rounded-md px-4 py-2 text-sm font-bold capitalize transition ${
-                tab === item ? 'bg-teal-300 text-slate-950 light:bg-sky-600 light:text-white' : 'bg-white/10 text-slate-200 light:bg-slate-100 light:text-slate-700'
+                tab === id ? 'bg-teal-300 text-slate-950 light:bg-sky-600 light:text-white' : 'bg-white/10 text-slate-200 light:bg-slate-100 light:text-slate-700'
               }`}
             >
-              {item}
+              {label}
             </button>
           ))}
         </div>
@@ -325,7 +335,7 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
               <div className="mb-4 flex items-center justify-between gap-3">
                 <h3 className="text-lg font-black">Hero Stats</h3>
                 <button
-                  onClick={() => addListItem('stats', { value: '1+', label: 'New stat' })}
+                  onClick={() => addListItem('stats', { value: '', label: '' })}
                   className="btn-primary gap-2 px-3 py-2 text-sm"
                 >
                   <FiPlus />
@@ -410,12 +420,12 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
             <section>
               <button
                 onClick={() => addListItem('experience', {
-                  title: 'New Experience',
-                  company: 'Company / Project',
-                  period: '2026',
-                  type: 'Project',
-                  description: 'Describe what you built or contributed.',
-                  technologies: ['React'],
+                  title: '',
+                  company: '',
+                  period: '',
+                  type: '',
+                  description: '',
+                  technologies: [],
                 })}
                 className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
               >
@@ -446,10 +456,10 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
             <section>
               <button
                 onClick={() => addListItem('education', {
-                  institution: 'New Education',
-                  degree: 'Degree / Course',
-                  period: '2026',
-                  coursework: ['Web development'],
+                  institution: '',
+                  degree: '',
+                  period: '',
+                  coursework: [],
                 })}
                 className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
               >
@@ -482,12 +492,12 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
             <button
               onClick={() => addListItem('certifications', {
                 id: crypto.randomUUID(),
-                title: 'New Certificate',
-                issuer: 'Issuer',
-                year: '2026',
+                title: '',
+                issuer: '',
+                year: '',
                 image: '',
                 verification: '',
-                category: 'Course',
+                category: '',
               })}
               className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
             >
@@ -523,29 +533,29 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
           </div>
         )}
 
-        {tab === 'testimonials' && (
+        {tab === 'feedback' && (
           <div className="mt-6">
             <button
-              onClick={() => addListItem('testimonials', {
-                quote: 'Write a short testimonial or working-style note.',
-                name: 'Client / Collaborator',
-                role: 'Role or context',
+              onClick={() => addListItem('feedback', {
+                quote: '',
+                name: '',
+                role: '',
               })}
               className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
             >
               <FiPlus />
-              Add Testimonial
+              Add Feedback
             </button>
 
             <div className="space-y-4">
-              {(draft.testimonials || []).map((testimonial, index) => (
-                <article key={`${testimonial.name}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+              {(draft.feedback || []).map((item, index) => (
+                <article key={`${item.name}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
                   <div className="grid gap-3 md:grid-cols-2">
-                    <input value={testimonial.name || ''} onChange={(event) => updateListItem('testimonials', index, 'name', event.target.value)} placeholder="Name" className="dashboard-input" />
-                    <input value={testimonial.role || ''} onChange={(event) => updateListItem('testimonials', index, 'role', event.target.value)} placeholder="Role / context" className="dashboard-input" />
-                    <textarea value={testimonial.quote || ''} onChange={(event) => updateListItem('testimonials', index, 'quote', event.target.value)} placeholder="Quote" className="dashboard-input md:col-span-2" />
+                    <input value={item.name || ''} onChange={(event) => updateListItem('feedback', index, 'name', event.target.value)} placeholder="Name" className="dashboard-input" />
+                    <input value={item.role || ''} onChange={(event) => updateListItem('feedback', index, 'role', event.target.value)} placeholder="Role / context" className="dashboard-input" />
+                    <textarea value={item.quote || ''} onChange={(event) => updateListItem('feedback', index, 'quote', event.target.value)} placeholder="Quote" className="dashboard-input md:col-span-2" />
                   </div>
-                  <button onClick={() => deleteListItem('testimonials', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                  <button onClick={() => deleteListItem('feedback', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
                     <FiTrash2 />
                     Delete
                   </button>
@@ -627,10 +637,6 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <a href={`mailto:${message.email}`} className="btn-secondary w-fit gap-2 px-3 py-2 text-sm">
-                        <FiMail />
-                        Reply
-                      </a>
                       <button
                         onClick={() => deleteMessage(message.id)}
                         disabled={deletingMessageId === message.id}

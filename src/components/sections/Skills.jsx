@@ -11,7 +11,6 @@ import {
   SiPostman,
   SiTailwindcss,
 } from 'react-icons/si'
-import { VscVscode } from 'react-icons/vsc'
 import SectionHeader from '../ui/SectionHeader'
 
 const skillIcons = {
@@ -34,12 +33,26 @@ const skillIcons = {
   'Next.js': SiNextdotjs,
   'Next JS': SiNextdotjs,
   NextJS: SiNextdotjs,
+  Nextjs: SiNextdotjs,
+  nextjs: SiNextdotjs,
   Angular: SiAngular,
-  'VS Code': VscVscode,
 }
 
+const requiredSkills = [
+  { name: 'Postman', category: 'API Testing' },
+  { name: '.NET', category: 'Backend' },
+  { name: 'Next.js', category: 'Frontend Framework' },
+  { name: 'Angular', category: 'Frontend Framework' },
+]
+
 function Skills({ skills }) {
-  const topSkills = skills.slice(0, 12)
+  const filteredSkills = skills.filter((skill) => skill.name !== 'VS Code')
+  const skillNames = new Set(filteredSkills.map((skill) => skill.name))
+  const visibleSkills = [
+    ...filteredSkills,
+    ...requiredSkills.filter((skill) => !skillNames.has(skill.name)),
+  ]
+  const topSkills = visibleSkills.slice(0, 16)
 
   return (
     <section id="skills" className="section-band px-4 py-20 md:px-8">

@@ -1,5 +1,5 @@
 import { FiArrowUpRight, FiDownload, FiMapPin, FiZap } from 'react-icons/fi'
-import fallbackProfileImage from '../../assets/Me.jpg'
+import fallbackProfileImage from '../../assets/boy.png'
 
 function Hero({ profile, socials, stats }) {
   const visibleStats = stats.slice(0, 3)

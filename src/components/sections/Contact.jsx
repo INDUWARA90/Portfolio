@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi'
+import { getEmailAddress, getMailtoLink } from '../../lib/contactLinks'
 import { sendContactMessage } from '../../lib/messages'
+import EmptyState from '../ui/EmptyState'
 import SectionHeader from '../ui/SectionHeader'
 
 function Contact({ profile }) {
+  const email = getEmailAddress(profile.email)
+  const mailtoLink = getMailtoLink(email, 'Portfolio inquiry')
+  const hasDirectContact = Boolean(email || profile.phone || profile.location)
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -51,32 +56,38 @@ function Contact({ profile }) {
               I usually reply fastest through email. You can also use the form and it will prepare an email for you.
             </p>
 
-            <div className="mt-7 space-y-4 text-sm font-bold">
-              {profile.email && (
-                <a className="flex items-center gap-3 rounded-md bg-white/62 p-4 transition hover:bg-white/86" href={`mailto:${profile.email}`}>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
-                    <FiMail />
-                  </span>
-                  {profile.email}
-                </a>
-              )}
-              {profile.phone && (
-                <a className="flex items-center gap-3 rounded-md bg-white/62 p-4 transition hover:bg-white/86" href={`tel:${profile.phone.replaceAll(' ', '')}`}>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
-                    <FiPhone />
-                  </span>
-                  {profile.phone}
-                </a>
-              )}
-              {profile.location && (
-                <p className="flex items-center gap-3 rounded-md bg-white/62 p-4">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
-                    <FiMapPin />
-                  </span>
-                  {profile.location}
-                </p>
-              )}
-            </div>
+            {hasDirectContact ? (
+              <div className="mt-7 space-y-4 text-sm font-bold">
+                {email && (
+                  <a className="flex items-center gap-3 rounded-md bg-white/62 p-4 transition hover:bg-white/86" href={mailtoLink}>
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
+                      <FiMail />
+                    </span>
+                    {email}
+                  </a>
+                )}
+                {profile.phone && (
+                  <a className="flex items-center gap-3 rounded-md bg-white/62 p-4 transition hover:bg-white/86" href={`tel:${profile.phone.replaceAll(' ', '')}`}>
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
+                      <FiPhone />
+                    </span>
+                    {profile.phone}
+                  </a>
+                )}
+                {profile.location && (
+                  <p className="flex items-center gap-3 rounded-md bg-white/62 p-4">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#2FA084] text-white">
+                      <FiMapPin />
+                    </span>
+                    {profile.location}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="mt-7">
+                <EmptyState title="Direct contact coming soon" message="Use the contact form for now, and direct contact details will be shared here soon." />
+              </div>
+            )}
           </aside>
 
           <form onSubmit={sendMessage} className="premium-card rounded-md p-6 md:p-8">

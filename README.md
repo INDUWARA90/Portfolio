@@ -1,20 +1,15 @@
 # Portfolio
 
-A modern recruiter-focused portfolio built with React, Vite, Tailwind CSS, Motion, React Icons, and Firebase.
+A modern recruiter-focused portfolio built with React, Vite, Tailwind CSS, React Icons, and Firebase.
 
 ## Features
 
 - Premium SaaS-style landing page
-- Dark and light mode
-- Searchable skills and projects
-- Project case-study modal
 - Certificates gallery
 - Experience and education timelines
 - GitHub profile panel
 - Firebase-backed admin dashboard for content editing
-- Portfolio chatbot
-- Command palette with `Ctrl + K`
-- PWA, SEO, robots, sitemap, and Firebase content storage
+- SEO metadata, robots, sitemap, and Firebase content storage
 
 ## Project Structure
 
@@ -22,12 +17,10 @@ A modern recruiter-focused portfolio built with React, Vite, Tailwind CSS, Motio
 src/
   components/
     dashboard/      Admin dashboard
-    interactive/    Chatbot, command palette, scroll tools
     layout/         Header and footer
     sections/       Main portfolio sections
     ui/             Reusable UI pieces
   data/             Portfolio content model
-  hooks/            Custom React hooks
   lib/              Firebase and content persistence helpers
 ```
 

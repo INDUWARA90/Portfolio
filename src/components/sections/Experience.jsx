@@ -1,10 +1,13 @@
 import { FiBookOpen, FiBriefcase, FiCheckCircle } from 'react-icons/fi'
+import EmptyState from '../ui/EmptyState'
 import SectionHeader from '../ui/SectionHeader'
 
 function Experience({ experience, education }) {
+  const experienceItems = Array.isArray(experience) ? experience : []
+  const educationItems = Array.isArray(education) ? education : []
   const timelineItems = [
-    ...experience.map((item) => ({ ...item, kind: 'Experience' })),
-    ...education.map((item) => ({
+    ...experienceItems.map((item) => ({ ...item, kind: 'Experience' })),
+    ...educationItems.map((item) => ({
       title: item.institution,
       company: item.degree,
       description: item.coursework?.join(', '),
@@ -20,8 +23,9 @@ function Experience({ experience, education }) {
         <SectionHeader eyebrow="Experience" title="Learning by building and shipping" description="A practical timeline of projects, freelance work, education, and responsibilities." />
 
         <div className="mx-auto max-w-4xl">
-          <div className="relative space-y-5 pl-5 before:absolute before:bottom-3 before:left-[0.85rem] before:top-3 before:w-px before:bg-[#2FA084]/22">
-            {timelineItems.map((item, index) => {
+          {timelineItems.length > 0 ? (
+            <div className="relative space-y-5 pl-5 before:absolute before:bottom-3 before:left-[0.85rem] before:top-3 before:w-px before:bg-[#2FA084]/22">
+              {timelineItems.map((item, index) => {
               const Icon = item.kind === 'Education' ? FiBookOpen : FiBriefcase
 
               return (
@@ -50,8 +54,11 @@ function Experience({ experience, education }) {
                   </div>
                 </article>
               )
-            })}
-          </div>
+              })}
+            </div>
+          ) : (
+            <EmptyState title="Timeline coming soon" message="Experience, education, and project milestones will be shared here soon." />
+          )}
         </div>
       </div>
     </section>

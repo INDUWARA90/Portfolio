@@ -1,5 +1,16 @@
-import { FaCss3Alt, FaHtml5, FaNodeJs, FaReact } from 'react-icons/fa'
-import { SiAngular, SiDotnet, SiFirebase, SiJavascript, SiMongodb, SiNextdotjs, SiPostman, SiTailwindcss } from 'react-icons/si'
+import { FaCss3Alt, FaGitAlt, FaGithub, FaHtml5, FaNodeJs, FaReact } from 'react-icons/fa'
+import {
+  SiAngular,
+  SiDotnet,
+  SiExpress,
+  SiFirebase,
+  SiJavascript,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiPostman,
+  SiTailwindcss,
+} from 'react-icons/si'
 
 const fallbackStack = [
   { name: 'React', Icon: FaReact },
@@ -19,24 +30,72 @@ const fallbackStack = [
 const iconMap = {
   React: FaReact,
   JavaScript: SiJavascript,
+  Javascript: SiJavascript,
+  JS: SiJavascript,
   'Tailwind CSS': SiTailwindcss,
+  Tailwind: SiTailwindcss,
+  TailwindCSS: SiTailwindcss,
   Firebase: SiFirebase,
+  Firestore: SiFirebase,
   'Node.js': FaNodeJs,
+  'Node JS': FaNodeJs,
+  NodeJS: FaNodeJs,
+  nodejs: FaNodeJs,
+  Express: SiExpress,
+  'Express.js': SiExpress,
   MongoDB: SiMongodb,
+  Mongodb: SiMongodb,
+  MySQL: SiMysql,
+  Mysql: SiMysql,
+  SQL: SiMysql,
+  Git: FaGitAlt,
+  GitHub: FaGithub,
+  Github: FaGithub,
   Postman: SiPostman,
   '.NET': SiDotnet,
   DotNet: SiDotnet,
+  'ASP.NET': SiDotnet,
+  'ASP.NET Core': SiDotnet,
   'Next.js': SiNextdotjs,
   'Next JS': SiNextdotjs,
   NextJS: SiNextdotjs,
+  Nextjs: SiNextdotjs,
+  nextjs: SiNextdotjs,
   Angular: SiAngular,
   HTML: FaHtml5,
   CSS: FaCss3Alt,
 }
 
+const normalizedIconMap = Object.fromEntries(
+  Object.entries(iconMap).map(([name, Icon]) => [normalizeSkillName(name), Icon]),
+)
+
+const requiredStack = [
+  { name: 'Postman' },
+  { name: '.NET' },
+  { name: 'Next.js' },
+  { name: 'Angular' },
+]
+
+function normalizeSkillName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9+#.]/g, '')
+}
+
+function getSkillIcon(name) {
+  return iconMap[name] || normalizedIconMap[normalizeSkillName(name)]
+}
+
 function TechMarquee({ skills }) {
-  const stack = skills.length
-    ? skills.slice(0, 10).map((skill) => ({ name: skill.name, Icon: iconMap[skill.name] }))
+  const filteredSkills = skills.filter((skill) => skill.name !== 'VS Code')
+  const skillNames = new Set(filteredSkills.map((skill) => normalizeSkillName(skill.name)))
+  const visibleSkills = [
+    ...filteredSkills,
+    ...requiredStack.filter((skill) => !skillNames.has(normalizeSkillName(skill.name))),
+  ]
+  const stack = visibleSkills.length
+    ? visibleSkills.slice(0, 14).map((skill) => ({ name: skill.name, Icon: getSkillIcon(skill.name) }))
     : fallbackStack
   const repeatedStack = [...stack, ...stack]
 

@@ -136,7 +136,7 @@ function GithubPanel({ github, socials = [] }) {
 
           {!username && (
             <p className="mt-4 rounded-md border border-[#2FA084]/16 bg-[#6FCF97]/14 px-4 py-3 text-sm font-semibold text-[#1F6F5F]">
-              Add a GitHub username in the dashboard, or add a GitHub social link, to show live profile data.
+              GitHub activity will appear here when a public profile is available.
             </p>
           )}
           {error && <p className="mt-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-600">{error}</p>}

@@ -1,4 +1,4 @@
-import profileImage from '../assets/Me.jpg'
+import profileImage from '../assets/boy.png'
 import projectImage from '../assets/P01.png'
 import cvPdf from '../assets/CV.pdf'
 
@@ -51,7 +51,7 @@ export const initialContent = {
       category: '',
     },
   ],
-  testimonials: [],
+  feedback: [],
   github: {
     username: '',
     followers: '',

@@ -10,12 +10,12 @@ import Certificates from './components/sections/Certificates'
 import Contact from './components/sections/Contact'
 import ContactCta from './components/sections/ContactCta'
 import Experience from './components/sections/Experience'
+import Feedback from './components/sections/Feedback'
 import GithubPanel from './components/sections/GithubPanel'
 import Hero from './components/sections/Hero'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
 import TechMarquee from './components/sections/TechMarquee'
-import Testimonials from './components/sections/Testimonials'
 import Reveal from './components/ui/Reveal'
 import { initialContent } from './data/siteContent'
 import { auth } from './lib/firebase'
@@ -79,13 +79,11 @@ export default function App() {
     <div className="page-shell min-h-screen overflow-x-hidden text-[#1F6F5F]">
       {isContentLoading && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-[#1F6F5F]/30 px-4 text-[#1F6F5F] backdrop-blur-md">
-          <div className="w-full max-w-sm rounded-md border border-[#2FA084]/20 bg-white/95 p-6 text-center shadow-2xl">
+          <div className="w-full max-w-sm rounded-md border p-6 text-center border-none">
             <div className="relative mx-auto grid h-16 w-16 place-items-center">
               <div className="absolute inset-0 animate-spin rounded-full border-2 border-[#6FCF97]/30 border-t-[#2FA084]" />
-              
             </div>
             <h2 className="mt-5 text-2xl font-black">Loading Data</h2>
-            <p className="mt-2 text-sm leading-6 text-[#1F6F5F]/70">Syncing the latest portfolio content from Firebase.</p>
           </div>
         </div>
       )}
@@ -144,7 +142,7 @@ export default function App() {
           <GithubPanel github={content.github} socials={content.socials} />
         </Reveal>
         <Reveal>
-          <Testimonials testimonials={content.testimonials} />
+          <Feedback feedback={content.feedback} />
         </Reveal>
         <Reveal>
           <Contact profile={content.profile} />

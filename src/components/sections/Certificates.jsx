@@ -1,18 +1,23 @@
 import { useState } from 'react'
 import { FiArrowUpRight, FiAward, FiEye } from 'react-icons/fi'
 import fallbackCertificateImage from '../../assets/P01.png'
+import EmptyState from '../ui/EmptyState'
 import SectionHeader from '../ui/SectionHeader'
 
 function Certificates({ certifications }) {
   const [selected, setSelected] = useState(null)
+  const visibleCertifications = Array.isArray(certifications)
+    ? certifications.filter((certificate) => certificate?.title || certificate?.issuer || certificate?.image)
+    : []
 
   return (
     <section id="certificates" className="section-band px-4 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader eyebrow="Certificates" title="Proof of continuous learning" description="Courses, credentials, and milestones that support practical project work." />
-        <div className="mx-auto grid max-w-6xl gap-7 md:grid-cols-2">
-          {certifications.map((certificate) => (
-            <article key={certificate.id} className="premium-card overflow-hidden rounded-md">
+        {visibleCertifications.length > 0 ? (
+          <div className="mx-auto grid max-w-6xl gap-7 md:grid-cols-2">
+            {visibleCertifications.map((certificate, index) => (
+            <article key={certificate.id || `${certificate.title}-${index}`} className="premium-card overflow-hidden rounded-md">
               <button onClick={() => setSelected(certificate)} className="block w-full text-left">
                 <div className="relative overflow-hidden bg-[#EEEEEE]">
                 {certificate.image && (
@@ -54,8 +59,13 @@ function Certificates({ certifications }) {
                 </div>
               </div>
             </article>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mx-auto max-w-4xl">
+            <EmptyState title="Certificates coming soon" message="Learning milestones and credentials will be shared here soon." />
+          </div>
+        )}
       </div>
       {selected && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-[#1F6F5F]/45 p-4 backdrop-blur">

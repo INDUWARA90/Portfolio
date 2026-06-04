@@ -7,6 +7,8 @@ const CONTENT_DOC = doc(db, 'portfolio', 'content')
 const legacyImageMap = {
   '/src/assets/Me.jpg': initialContent.profile.image,
   'src/assets/Me.jpg': initialContent.profile.image,
+  '/src/assets/boy.png': initialContent.profile.image,
+  'src/assets/boy.png': initialContent.profile.image,
   '/src/assets/P01.png': initialContent.projects[0]?.image || '',
   'src/assets/P01.png': initialContent.projects[0]?.image || '',
 }
@@ -77,12 +79,21 @@ function normalizePortfolioContent(content) {
       })
     : initialContent.certifications
 
+  const feedback = Array.isArray(content.feedback)
+    ? content.feedback
+    : Array.isArray(content.testimonials)
+      ? content.testimonials
+      : initialContent.feedback
+  const contentWithoutLegacyFeedback = { ...content }
+  delete contentWithoutLegacyFeedback.testimonials
+
   return {
     ...initialContent,
-    ...content,
+    ...contentWithoutLegacyFeedback,
     profile,
     projects,
     certifications,
+    feedback,
   }
 }
 
@@ -105,9 +116,11 @@ export async function getPortfolioContent() {
 
 export async function savePortfolioContent(content) {
   const safeContent = normalizePortfolioContent(content)
+  const contentToSave = { ...safeContent }
+  delete contentToSave.testimonials
 
   await setDoc(CONTENT_DOC, {
-    ...safeContent,
+    ...contentToSave,
     updatedAt: serverTimestamp(),
   })
 }

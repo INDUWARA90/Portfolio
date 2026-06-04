@@ -1,6 +1,10 @@
 import { FiArrowRight, FiMail } from 'react-icons/fi'
+import { getEmailAddress, getMailtoLink } from '../../lib/contactLinks'
 
 function ContactCta({ profile }) {
+  const email = getEmailAddress(profile.email)
+  const mailtoLink = getMailtoLink(email, 'Portfolio inquiry')
+
   return (
     <section className="relative z-10 px-4 py-10 md:px-8">
       <div className="mx-auto grid max-w-6xl gap-6 rounded-md border border-[#2FA084]/18 bg-gradient-to-br from-[#1F6F5F] via-[#2FA084] to-[#6FCF97] p-6 text-white shadow-[0_28px_70px_rgba(31,111,95,0.22)] md:grid-cols-[1fr_auto] md:items-center md:p-8">
@@ -13,8 +17,8 @@ function ContactCta({ profile }) {
         </div>
 
         <div className="flex flex-wrap gap-3 md:justify-end">
-          {profile.email && (
-            <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-black text-[#1F6F5F] shadow-xl">
+          {email && (
+            <a href={mailtoLink} className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-black text-[#1F6F5F] shadow-xl">
               <FiMail />
               Email Me
             </a>
