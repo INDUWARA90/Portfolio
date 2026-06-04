@@ -17,7 +17,7 @@ function Feedback({ feedback }) {
   const [featuredFeedback, ...supportingFeedback] = visibleFeedback
 
   return (
-    <section id="feedback" className="section-band px-4 py-20 md:px-8">
+    <section id="feedback" className="section-band px-4 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Feedback"
@@ -27,11 +27,11 @@ function Feedback({ feedback }) {
 
         {visibleFeedback.length > 0 ? (
           <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-            <article className="rounded-md border border-[#2FA084]/18 bg-gradient-to-br from-[#1F6F5F] via-[#2FA084] to-[#6FCF97] p-6 text-white shadow-[0_28px_70px_rgba(31,111,95,0.2)] md:p-8">
+            <article className="rounded-md border border-[#2FA084]/18 bg-gradient-to-br from-[#1F6F5F] via-[#2FA084] to-[#6FCF97] p-5 text-white shadow-[0_28px_70px_rgba(31,111,95,0.2)] md:p-8">
               <div className="flex items-center gap-2 text-[#6FCF97]">
                 {[0, 1, 2, 3, 4].map((item) => <FiStar key={item} className="fill-current" />)}
               </div>
-              <p className="mt-6 text-2xl font-semibold leading-10">&ldquo;{featuredFeedback.quote}&rdquo;</p>
+              <p className="mt-5 text-xl font-semibold leading-8 sm:text-2xl sm:leading-10">&ldquo;{featuredFeedback.quote}&rdquo;</p>
               {(featuredFeedback.name || featuredFeedback.role) && (
                 <div className="mt-8 flex items-center gap-4">
                   {featuredFeedback.name && (
@@ -49,8 +49,8 @@ function Feedback({ feedback }) {
 
             <div className="grid gap-5">
               {supportingFeedback.map((item, index) => (
-                <article key={`${item.name}-${item.role}-${index}`} className="premium-card rounded-md p-6">
-                  <div className="flex items-start gap-4">
+                <article key={`${item.name}-${item.role}-${index}`} className="premium-card rounded-md p-5 sm:p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-[#6FCF97] text-xl text-[#1F6F5F]">
                       <FiMessageCircle />
                     </div>

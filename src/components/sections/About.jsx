@@ -9,12 +9,12 @@ function About({ profile, services }) {
   const story = profile.story || ''
   
   return (
-    <section id="about" className="section-band px-4 py-20 md:px-8">
+    <section id="about" className="section-band px-4 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
         <SectionHeader eyebrow="About" title="A developer story with product thinking" description={objective} />
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="premium-card rounded-md p-6 text-[#1F6F5F]/78 light:text-slate-700 md:p-8">
-            <h3 className="text-2xl font-semibold text-[#1F6F5F] light:text-slate-950">Personal Story</h3>
+          <div className="premium-card rounded-md p-5 text-[#1F6F5F]/78 light:text-slate-700 md:p-8">
+            <h3 className="text-xl font-semibold text-[#1F6F5F] light:text-slate-950 sm:text-2xl">Personal Story</h3>
             {story ? (
               <p className="mt-4 leading-8">{story}</p>
             ) : (
@@ -37,8 +37,8 @@ function About({ profile, services }) {
               )}
             </div>
           </div>
-          <div className="rounded-md border border-[#2FA084]/24 bg-gradient-to-br from-[#6FCF97]/65 via-white to-[#EEEEEE] p-6 text-[#1F6F5F] shadow-[0_24px_64px_rgba(47,160,132,0.18)] light:border-sky-200 light:from-teal-50 light:via-sky-50 light:to-white md:p-8">
-            <h3 className="text-2xl font-bold">What I Can Help With</h3>
+          <div className="rounded-md border border-[#2FA084]/24 bg-gradient-to-br from-[#6FCF97]/65 via-white to-[#EEEEEE] p-5 text-[#1F6F5F] shadow-[0_24px_64px_rgba(47,160,132,0.18)] light:border-sky-200 light:from-teal-50 light:via-sky-50 light:to-white md:p-8">
+            <h3 className="text-xl font-bold sm:text-2xl">What I Can Help With</h3>
             {serviceItems.length > 0 ? (
               <ul className="mt-5 space-y-4">
                 {serviceItems.map((service) => (

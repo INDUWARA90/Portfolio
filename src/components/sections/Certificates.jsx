@@ -11,7 +11,7 @@ function Certificates({ certifications }) {
     : []
 
   return (
-    <section id="certificates" className="section-band px-4 py-24 md:px-8">
+    <section id="certificates" className="section-band px-4 py-14 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <SectionHeader eyebrow="Certificates" title="Proof of continuous learning" description="Courses, credentials, and milestones that support practical project work." />
         {visibleCertifications.length > 0 ? (
@@ -24,7 +24,7 @@ function Certificates({ certifications }) {
                   <img
                     src={certificate.image}
                     alt={certificate.title}
-                    className="h-72 w-full object-cover transition duration-500 hover:scale-105"
+                    className="h-56 w-full object-cover transition duration-500 hover:scale-105 sm:h-72"
                     loading="lazy"
                     onError={(event) => {
                       event.currentTarget.src = fallbackCertificateImage
@@ -38,12 +38,12 @@ function Certificates({ certifications }) {
               </div>
               </button>
 
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="flex flex-wrap items-center gap-2">
                   {certificate.issuer && <p className="rounded-md bg-[#6FCF97]/24 px-3 py-1 text-xs font-black text-[#2FA084]">{certificate.issuer}</p>}
                   {certificate.year && <p className="rounded-md bg-white/70 px-3 py-1 text-xs font-black text-[#1F6F5F]/70">{certificate.year}</p>}
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-[#1F6F5F] light:text-slate-950">{certificate.title}</h3>
+                <h3 className="mt-4 break-words text-xl font-black text-[#1F6F5F] light:text-slate-950 sm:text-2xl">{certificate.title}</h3>
                 {certificate.category && <p className="mt-2 text-sm font-semibold text-[#1F6F5F]/62">{certificate.category}</p>}
                 <div className="mt-5 flex flex-wrap gap-3">
                   <button onClick={() => setSelected(certificate)} className="btn-secondary gap-2 px-4 py-2 text-sm">

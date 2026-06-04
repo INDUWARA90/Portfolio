@@ -336,6 +336,53 @@ body::selection {
     }
   }
 
+  @media (max-width: 640px) {
+    .section-band::after {
+      width: calc(100vw - 2rem);
+    }
+
+    .profile-frame {
+      padding: 0.5rem;
+      box-shadow: 0 22px 50px rgba(31, 111, 95, 0.14);
+    }
+
+    .profile-frame::before {
+      inset: 0.75rem -0.25rem -0.25rem 0.75rem;
+    }
+
+    .premium-card:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: none;
+    }
+
+    .soft-chip {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .page-shell .section-band {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .page-shell :where(.hero-panel, .empty-state) {
+      padding: 1rem;
+    }
+
+    .section-band::after {
+      width: calc(100vw - 1.5rem);
+    }
+
+    .page-shell :where(.btn-primary, .btn-secondary) {
+      min-height: 2.65rem;
+      padding-left: 0.875rem;
+      padding-right: 0.875rem;
+    }
+  }
+
   .dashboard-input {
     width: 100%;
     border-radius: 0.5rem;

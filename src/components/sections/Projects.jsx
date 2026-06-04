@@ -28,7 +28,7 @@ function Projects({ projects }) {
   }
 
   return (
-    <section id="projects" className="section-band px-4 py-20 md:px-8">
+    <section id="projects" className="section-band px-4 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
         <SectionHeader eyebrow="Projects" title="Selected work with live links" description="A small set of projects that show interface thinking, responsiveness, and practical JavaScript/React skills." />
 
@@ -41,7 +41,7 @@ function Projects({ projects }) {
                   <img
                     src={project.image}
                     alt={`${project.title} screenshot`}
-                    className="h-60 w-full object-cover transition duration-500 hover:scale-105"
+                    className="h-48 w-full object-cover transition duration-500 hover:scale-105 sm:h-60"
                     loading="lazy"
                     onError={(event) => {
                       event.currentTarget.src = fallbackProjectImage
@@ -50,11 +50,11 @@ function Projects({ projects }) {
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1F6F5F]/55 to-transparent" />
                 </div>
               )}
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <p className="text-sm font-bold text-[#2FA084] light:text-sky-700">{project.category}</p>
-                    <h3 className="mt-1 text-2xl font-black text-[#1F6F5F] light:text-slate-950">{project.title}</h3>
+                    <h3 className="mt-1 break-words text-xl font-black text-[#1F6F5F] light:text-slate-950 sm:text-2xl">{project.title}</h3>
                   </div>
                   <span className="rounded-md bg-[#6FCF97] px-3 py-1 text-xs font-black text-[#1F6F5F] light:bg-sky-100 light:text-sky-800">{project.status}</span>
                 </div>

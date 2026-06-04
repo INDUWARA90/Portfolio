@@ -9,7 +9,7 @@ function Achievements({ achievements }) {
     : []
 
   return (
-    <section id="achievements" className="section-band px-4 py-20 md:px-8">
+    <section id="achievements" className="section-band px-4 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Achievements"
@@ -26,7 +26,7 @@ function Achievements({ achievements }) {
                     <img
                       src={achievement.image}
                       alt={achievement.title || 'Achievement'}
-                      className="h-72 w-full object-cover transition duration-500 hover:scale-105 md:h-80"
+                      className="h-56 w-full object-cover transition duration-500 hover:scale-105 sm:h-72 md:h-80"
                       loading="lazy"
                       onError={(event) => {
                         event.currentTarget.src = fallbackAchievementImage
@@ -36,8 +36,8 @@ function Achievements({ achievements }) {
                   </div>
                 )}
 
-                <div className="flex items-start gap-4 p-6">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-[#6FCF97] text-xl text-[#1F6F5F]">
+                <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:p-6">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-[#6FCF97] text-xl text-[#1F6F5F] sm:h-12 sm:w-12">
                     <FiAward />
                   </div>
                   <div className="min-w-0">
@@ -54,7 +54,7 @@ function Achievements({ achievements }) {
                       )}
                     </div>
 
-                    {achievement.title && <h3 className="mt-4 text-2xl font-black text-[#1F6F5F] light:text-slate-950">{achievement.title}</h3>}
+                    {achievement.title && <h3 className="mt-4 break-words text-xl font-black text-[#1F6F5F] light:text-slate-950 sm:text-2xl">{achievement.title}</h3>}
                     {achievement.description && <p className="mt-3 leading-7 text-[#1F6F5F]/76 light:text-slate-700">{achievement.description}</p>}
 
                     <div className="mt-5 flex flex-wrap items-center gap-3">

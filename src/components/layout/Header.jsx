@@ -22,13 +22,13 @@ function Header({ profile, socials, onOpenDashboard }) {
   const closeSidebar = () => setIsOpen(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 text-[#1F6F5F] light:text-slate-950">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-md border border-[#1F6F5F]/10 bg-white/88 px-4 py-3 shadow-[0_18px_50px_rgba(31,111,95,0.12)] backdrop-blur-2xl light:border-slate-200 light:bg-white/95 light:shadow-[0_16px_45px_rgba(15,23,42,0.1)] md:px-5">
-        <a href="#home" className="text-lg font-extrabold tracking-tight">
+    <header className="fixed inset-x-0 top-0 z-40 px-2 pt-2 text-[#1F6F5F] light:text-slate-950 sm:px-3 sm:pt-3">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-md border border-[#1F6F5F]/10 bg-white/88 px-3 py-2.5 shadow-[0_18px_50px_rgba(31,111,95,0.12)] backdrop-blur-2xl light:border-slate-200 light:bg-white/95 light:shadow-[0_16px_45px_rgba(15,23,42,0.1)] sm:py-3 md:px-5">
+        <a href="#home" className="min-w-0 truncate text-base font-extrabold tracking-tight sm:text-lg">
           {brand}<span className="text-[#2FA084] light:text-sky-600">.</span>
         </a>
 
-        <ul className="hidden items-center gap-4 text-sm font-semibold text-[#1F6F5F]/75 light:text-slate-700 lg:flex">
+        <ul className="hidden items-center gap-4 text-sm font-semibold text-[#1F6F5F]/75 light:text-slate-700 xl:flex">
           {navItems.map(([label, href]) => (
             <li key={label}>
               <a className="transition hover:text-[#2FA084] light:hover:text-sky-700" href={href}>
@@ -38,7 +38,7 @@ function Header({ profile, socials, onOpenDashboard }) {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           {github && (
             <a href={github} target="_blank" rel="noreferrer" aria-label="GitHub" className="icon-button">
               <BsGithub />
@@ -57,7 +57,7 @@ function Header({ profile, socials, onOpenDashboard }) {
           </a>
         </div>
 
-        <button className="text-3xl lg:hidden" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle menu">
+        <button className="text-2xl xl:hidden sm:text-3xl" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle menu">
           {isOpen ? <BiX /> : <BiMenu />}
         </button>
       </nav>
@@ -65,7 +65,7 @@ function Header({ profile, socials, onOpenDashboard }) {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 transition-opacity duration-300 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/50 transition-opacity duration-300 xl:hidden"
           onClick={closeSidebar}
           aria-hidden="true"
         />
@@ -73,9 +73,9 @@ function Header({ profile, socials, onOpenDashboard }) {
 
       {/* Sidebar Navigation */}
       <div
-        className={`fixed right-0 top-0 z-40 h-screen w-64 transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed right-0 top-0 z-40 h-screen w-[min(17rem,calc(100vw-2rem))] transform transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
-        } border-l border-[#1F6F5F]/10 bg-white/95 px-6 py-6 backdrop-blur-xl light:border-slate-200 light:bg-white/95 overflow-y-auto`}
+        } border-l border-[#1F6F5F]/10 bg-white/95 px-5 py-5 backdrop-blur-xl light:border-slate-200 light:bg-white/95 overflow-y-auto xl:hidden`}
       >
         <button
           onClick={closeSidebar}

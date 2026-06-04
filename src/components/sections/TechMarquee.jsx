@@ -100,11 +100,11 @@ function TechMarquee({ skills }) {
   const repeatedStack = [...stack, ...stack]
 
   return (
-    <section aria-label="Technology stack" className="relative z-10 px-4 py-8 md:px-8">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-md border border-[#1F6F5F]/10 bg-white/72 py-4 shadow-[0_20px_50px_rgba(31,111,95,0.08)] backdrop-blur">
-        <div className="tech-marquee-track flex w-max items-center gap-3">
+    <section aria-label="Technology stack" className="relative z-10 px-3 py-6 sm:px-4 sm:py-8 md:px-8">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-md border border-[#1F6F5F]/10 bg-white/72 py-3 shadow-[0_20px_50px_rgba(31,111,95,0.08)] backdrop-blur sm:py-4">
+        <div className="tech-marquee-track flex w-max items-center gap-2 sm:gap-3">
           {repeatedStack.map(({ name, Icon }, index) => (
-            <div key={`${name}-${index}`} className="soft-chip px-4 py-3 text-sm font-black">
+            <div key={`${name}-${index}`} className="soft-chip px-3 py-2.5 text-xs font-black sm:px-4 sm:py-3 sm:text-sm">
               {Icon ? <Icon className="text-lg text-[#2FA084]" /> : <span className="text-[#2FA084]">#</span>}
               {name}
             </div>

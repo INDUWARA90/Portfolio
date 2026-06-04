@@ -84,7 +84,7 @@ function GithubPanel({ github, socials = [] }) {
   const profileBio = liveGithub?.bio || 'Connect the portfolio to a GitHub username to show live public activity.'
 
   return (
-    <section id="github" className="section-band px-4 py-24 md:px-8">
+    <section id="github" className="section-band px-4 py-14 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <SectionHeader eyebrow="GitHub" title="Open-source footprint" description="A quick look at public GitHub activity and profile details." />
 
@@ -100,7 +100,7 @@ function GithubPanel({ github, socials = [] }) {
                   </div>
                 )}
                 <div className="min-w-0">
-                  <h3 className="truncate text-2xl font-black text-[#1F6F5F]">{profileName}</h3>
+                  <h3 className="truncate text-xl font-black text-[#1F6F5F] sm:text-2xl">{profileName}</h3>
                   {username && <p className="mt-1 text-sm font-bold text-[#2FA084]">@{username}</p>}
                 </div>
               </div>
