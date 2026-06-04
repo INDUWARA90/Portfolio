@@ -49,9 +49,9 @@ function Header({ profile, socials, onOpenDashboard }) {
               <BsLinkedin />
             </a>
           )}
-          <button className="btn-secondary px-4 py-2 text-sm" onClick={onOpenDashboard}>
+          {/* <button className="btn-secondary px-4 py-2 text-sm" onClick={onOpenDashboard}>
             Dashboard
-          </button>
+          </button> */}
           <a href="#contact" className="btn-primary px-4 py-2 text-sm">
             Hire Me
           </a>
@@ -124,7 +124,7 @@ function Header({ profile, socials, onOpenDashboard }) {
             </div>
 
             <div className="flex flex-col gap-3">
-              <button
+              {/* <button
                 className="btn-secondary w-full px-4 py-2 text-sm"
                 onClick={() => {
                   onOpenDashboard()
@@ -132,7 +132,7 @@ function Header({ profile, socials, onOpenDashboard }) {
                 }}
               >
                 Dashboard
-              </button>
+              </button> */}
               <a href="#contact" onClick={closeSidebar} className="btn-primary w-full px-4 py-2 text-center text-sm">
                 Hire Me
               </a>
