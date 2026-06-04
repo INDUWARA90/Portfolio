@@ -40,6 +40,18 @@ export const initialContent = {
   ],
   experience: [],
   education: [],
+  achievements: [
+    {
+      id: 'achievement-1',
+      title: '',
+      issuer: '',
+      year: '',
+      category: '',
+      description: '',
+      image: projectImage,
+      link: '',
+    },
+  ],
   certifications: [
     {
       id: 'certificate-1',

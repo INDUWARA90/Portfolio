@@ -10,6 +10,7 @@ const tabs = [
   ['projects', 'Projects'],
   ['skills', 'Skills'],
   ['experience', 'Experience'],
+  ['achievements', 'Achievements'],
   ['certificates', 'Certificates'],
   ['feedback', 'Feedback'],
   ['github', 'GitHub'],
@@ -524,6 +525,54 @@ function AdminDashboard({ content, setContent, onReset, user, onClose }) {
                     </div>
                   </div>
                   <button onClick={() => deleteListItem('certifications', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
+                    <FiTrash2 />
+                    Delete
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'achievements' && (
+          <div className="mt-6">
+            <button
+              onClick={() => addListItem('achievements', {
+                id: crypto.randomUUID(),
+                title: '',
+                issuer: '',
+                year: '',
+                category: '',
+                description: '',
+                image: '',
+                link: '',
+              })}
+              className="btn-primary mb-4 gap-2 px-4 py-2 text-sm"
+            >
+              <FiPlus />
+              Add Achievement
+            </button>
+
+            <div className="space-y-4">
+              {(draft.achievements || []).map((achievement, index) => (
+                <article key={`${achievement.id}-${index}`} className="rounded-md border border-white/10 p-4 light:border-slate-200">
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <input value={achievement.title || ''} onChange={(event) => updateListItem('achievements', index, 'title', event.target.value)} placeholder="Title" className="dashboard-input" />
+                    <input value={achievement.issuer || ''} onChange={(event) => updateListItem('achievements', index, 'issuer', event.target.value)} placeholder="Organization / context" className="dashboard-input" />
+                    <input value={achievement.year || ''} onChange={(event) => updateListItem('achievements', index, 'year', event.target.value)} placeholder="Year" className="dashboard-input" />
+                    <input value={achievement.category || ''} onChange={(event) => updateListItem('achievements', index, 'category', event.target.value)} placeholder="Category" className="dashboard-input" />
+                    <input value={achievement.link || ''} onChange={(event) => updateListItem('achievements', index, 'link', event.target.value)} placeholder="Link" className="dashboard-input md:col-span-2" />
+                    <div className="md:col-span-2">
+                      <ImageUploader
+                        folder="portfolio/achievements"
+                        imageUrl={achievement.image}
+                        label={`${achievement.title} achievement`}
+                        onUploaded={(url) => updateListItem('achievements', index, 'image', url)}
+                      />
+                    </div>
+                    <textarea value={achievement.description || ''} onChange={(event) => updateListItem('achievements', index, 'description', event.target.value)} placeholder="Description" className="dashboard-input md:col-span-2" />
+                  </div>
+                  <button onClick={() => deleteListItem('achievements', index)} className="mt-3 inline-flex items-center gap-2 rounded-md bg-red-500/15 px-3 py-2 text-sm font-bold text-red-200 light:text-red-700">
                     <FiTrash2 />
                     Delete
                   </button>

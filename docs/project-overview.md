@@ -6,7 +6,7 @@ This document explains the portfolio project structure, features, content model,
 
 This is a modern personal portfolio built with React, Vite, Tailwind CSS, React Icons, Firebase Authentication, and Firestore.
 
-The public site displays portfolio content such as profile details, skills, projects, experience, education, certificates, feedback, GitHub stats, and contact information. Most content is editable through the admin dashboard and stored in Firestore.
+The public site displays portfolio content such as profile details, skills, projects, experience, education, achievements, certificates, feedback, GitHub stats, and contact information. Most content is editable through the admin dashboard and stored in Firestore.
 
 ## Main Technologies
 
@@ -112,6 +112,7 @@ Navigation includes:
 - Skills
 - Projects
 - Experience
+- Achievements
 - Feedback
 - Contact
 
@@ -341,6 +342,33 @@ verification
 category
 ```
 
+### Achievements
+
+File:
+
+```text
+src/components/sections/Achievements.jsx
+```
+
+Displays milestone cards for recognized work, competitions, learning highlights, or project outcomes.
+
+Dashboard-controlled data:
+
+- `achievements`
+
+Achievement fields:
+
+```text
+id
+title
+issuer
+year
+category
+description
+image
+link
+```
+
 ### GitHub Panel
 
 File:
@@ -486,6 +514,7 @@ Dashboard tabs:
 - Projects
 - Skills
 - Experience
+- Achievements
 - Certificates
 - Feedback
 - GitHub
@@ -573,6 +602,20 @@ Controls:
 - Verification link
 - Certificate image upload
 
+### Achievements
+
+Controls:
+
+- Add achievement
+- Delete achievement
+- Title
+- Organization/context
+- Year
+- Category
+- Description
+- Image upload
+- Optional link
+
 ### Feedback
 
 Controls:
@@ -628,6 +671,7 @@ Main object shape:
   projects: [],
   experience: [],
   education: [],
+  achievements: [],
   certifications: [],
   feedback: [],
   github: {}

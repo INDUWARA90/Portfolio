@@ -22,6 +22,7 @@ src/
 - Skills
 - Projects
 - Experience
+- Achievements
 - Certificates
 - GitHub panel
 - Feedback
@@ -45,6 +46,7 @@ Main editable fields:
 - `projects`
 - `experience`
 - `education`
+- `achievements`
 - `certifications`
 - `feedback`
 - `github`

@@ -5,6 +5,7 @@ import AdminDashboard from './components/dashboard/AdminDashboard'
 import DashboardLock from './components/dashboard/DashboardLock'
 import Footer from './components/layout/Footer'
 import Header from './components/layout/Header'
+import Achievements from './components/sections/Achievements'
 import About from './components/sections/About'
 import Certificates from './components/sections/Certificates'
 import Contact from './components/sections/Contact'
@@ -134,6 +135,9 @@ export default function App() {
         </Reveal>
         <Reveal>
           <Experience experience={content.experience} education={content.education} />
+        </Reveal>
+        <Reveal>
+          <Achievements achievements={content.achievements} />
         </Reveal>
         <Reveal>
           <Certificates certifications={content.certifications} />

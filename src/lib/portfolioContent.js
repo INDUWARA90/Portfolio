@@ -47,6 +47,7 @@ function resolveFileUrl(value, fallback = '') {
 function normalizePortfolioContent(content) {
   const defaultProjectImage = initialContent.projects[0]?.image || ''
   const defaultCertificateImage = initialContent.certifications[0]?.image || ''
+  const defaultAchievementImage = initialContent.achievements[0]?.image || ''
 
   const profile = {
     ...initialContent.profile,
@@ -84,6 +85,17 @@ function normalizePortfolioContent(content) {
     : Array.isArray(content.testimonials)
       ? content.testimonials
       : initialContent.feedback
+  const achievements = Array.isArray(content.achievements)
+    ? content.achievements.map((achievement, index) => {
+        const fallback = initialContent.achievements.find((item) => item.id === achievement.id) || initialContent.achievements[index] || {}
+
+        return {
+          ...fallback,
+          ...achievement,
+          image: resolveImageUrl(achievement.image, fallback.image || defaultAchievementImage),
+        }
+      })
+    : initialContent.achievements
   const contentWithoutLegacyFeedback = { ...content }
   delete contentWithoutLegacyFeedback.testimonials
 
@@ -93,6 +105,7 @@ function normalizePortfolioContent(content) {
     profile,
     projects,
     certifications,
+    achievements,
     feedback,
   }
 }
